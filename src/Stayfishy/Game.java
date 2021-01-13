@@ -1,13 +1,16 @@
 package Stayfishy;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Game {
     private int inputInt;
-    public int gameRounds;
-    private String error = "You have entered invalid number, enter a new:";
+    private int gameRounds;
+    public static int gameRoundsLeft;
     MenuSystem menuSystem = new MenuSystem();
+    Store store = new Store();
     ControlMethods controlMethods = new ControlMethods();
     Scanner input = new Scanner(System.in);
+    public ArrayList<Players> contestants = new ArrayList<>();
 
 
     public Game() {
@@ -28,13 +31,12 @@ public class Game {
             if (inputInt > 0 && inputInt < 5) {
                 for (int i = 0; i < inputInt; i++) {
                     System.out.println("Enter new players name:");
-                    Player player = new Player(input.nextLine());
-                    System.out.println(player.getMoney());
+                    Players players = new Players(input.nextLine());
+                    contestants.add(players);
                 }
 
-
             } else
-                System.out.println(error);
+                ControlMethods.errorString();
 
 
         } while (!(inputInt > 0 && inputInt < 5));
@@ -46,9 +48,65 @@ public class Game {
                 gameRounds = inputInt;
 
             else
-                System.out.println(error);
+                ControlMethods.errorString();
 
         } while (!(inputInt > 4 && inputInt < 31));
+        gamePlay();
+    }
+
+    private void gamePlay() {
+        for (int i = 0; i < gameRounds; i++) {
+            gameRoundsLeft = gameRoundsLeft + 1;
+            for (Players player : contestants) {
+
+                menuSystem.mainMenu(player);
+                chooseAction(player);
+
+                //menuSystem.foodMenu(controlMethods.convertInputToInt()); Kalla på inkommande värde
+            }
+        }
 
     }
+
+    private void chooseAction(Players player) {
+        int inputInt;
+        do {
+            inputInt = controlMethods.convertInputToInt();
+
+                switch (inputInt) {
+                    case 1: {
+                        menuSystem.fishMenu();
+                        store.buyFish(controlMethods.convertInputToInt());
+                        break;
+                    }
+                    case 2: {
+                        menuSystem.foodMenu(player);
+                        store.buyFood(controlMethods.convertInputToInt());
+                        break;
+                    }
+
+                    case 3: {
+                        //Feed Fish
+                        break;
+                    }
+
+                    case 4: {
+                        //Breed fish
+                        System.out.println();
+                        break;
+                    }
+                    case 5: {
+
+                    }
+
+                    default: {
+                        ControlMethods.errorString();
+                    }
+
+
+                }
+
+        } while ((inputInt < 1) || (inputInt >5));
+    }
+
 }

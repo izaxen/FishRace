@@ -3,7 +3,8 @@ package Stayfishy;
 import java.util.Scanner;
 
 public class MenuSystem {
-    private Scanner input = new Scanner(System.in);
+
+
     private String starRow = "\n*************************************************************";
 
     private String starRowTitle = "\n*************************************************************\n" +
@@ -26,31 +27,38 @@ public class MenuSystem {
 
     }
 
-    public void mainMenu() {
-        System.out.printf("%1$s%n* \t\t\t\t\tStayfishy main menu \t\t\t\t\t*%1$s%n",starRow);
+    public void mainMenu(Players players) {
+
+        System.out.printf("%1$s%n* \t\t\t\t\tStayfishy main menu\t\t\tRound: %4$d\t*%n" +
+                "* Playername: %2$s\t\t\t\t\t\t\tBank: %3$skr*%1$s%n",starRow, players.getName(), players.getMoney(),Game.gameRoundsLeft);
         System.out.println("* [1] Buy fish\n" +
-                "* [2] Buy food\n" +
-                "* [3] Feed your fish\n" +
-                "* [4] Try to breed our fishes");
+                "* [2] Sell your fish\n" +
+                "* [3] Buy food\n" +
+                "* [4] Feed your fish\n" +
+                "* [5] Try to breed your fish");
     }
 
-    public void foodMenu() {
+    public void fishMenu() {
+        System.out.printf("%1$s%n* \t\t\t\t\tStayfishy fish shop \t\t\t\t\t*%1$s%n",starRow);
+        System.out.println(
+                "* [1] Buy Minow\t\t\t\t\t\t\t 30:-\n" +
+                "* [2] Buy Corydoras Sterbai\t\t\t\t 80:-\n" +
+                "* [3] Buy Angelfish\t\t\t\t\t\t 150:-\n" +
+                "* [4] Buy Pirahna\t\t\t\t\t\t 300:-\n" +
+                "* [5] Buy Hyperancistrus Zebra\t\t\t 1050:-\n" +
+                "* [6] End turn");
+    }
+
+    public void foodMenu(Players players) {
+
         System.out.printf("%1$s%n* \t\t\t\t\tStayfishy food shop \t\t\t\t\t*%1$s%n",starRow);
 
         System.out.println("* [1] Buy meat\n" +
                 "* [2] Buy flakes\n" +
                 "* [3] Buy tetrabits\n" +
-                "* [4] Leave shop");
+                "* [4] End turn");
 
     }
 
-    public void fishMenu() {
-        System.out.printf("%1$s%n* \t\t\t\t\tStayfishy fish shop \t\t\t\t\t*%1$s%n",starRow);
-        System.out.println("* [1] Buy Angelfish\n" +
-                "* [2] Buy Corydoras Sterbai\n" +
-                "* [3] Buy Hyperancistrus Zebra\n" +
-                "* [4] Buy Pirahna\n" +
-                "* [5] Buy Minnow\n" +
-                "* [6] Leave fishshop");
-    }
+
 }
