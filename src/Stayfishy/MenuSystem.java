@@ -1,7 +1,5 @@
 package Stayfishy;
 
-import java.util.Scanner;
-
 public class MenuSystem {
 
 
@@ -27,10 +25,10 @@ public class MenuSystem {
 
     }
 
-    public void mainMenu(Players players) {
+    public void mainMenu(Player player) {
 
         System.out.printf("%1$s%n* \t\t\t\t\tStayfishy main menu\t\t\tRound: %4$d\t*%n" +
-                "* Playername: %2$s\t\t\t\t\t\t\tBank: %3$skr*%1$s%n",starRow, players.getName(), players.getMoney(),Game.gameRoundsLeft);
+                "* Playername: %2$s\t\t\t\t\t\t\tBank: %3$skr*%1$s%n",starRow, player.getName(), player.getMoney(),Game.gameRoundsLeft);
         System.out.println("* [1] Buy fish\n" +
                 "* [2] Sell your fish\n" +
                 "* [3] Buy food\n" +
@@ -49,7 +47,7 @@ public class MenuSystem {
                 "* [6] End turn");
     }
 
-    public void foodMenu(Players players) {
+    public void foodMenu(Player player) {
 
         System.out.printf("%1$s%n* \t\t\t\t\tStayfishy food shop \t\t\t\t\t*%1$s%n",starRow);
 

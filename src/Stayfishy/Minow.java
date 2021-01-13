@@ -1,17 +1,15 @@
 package Stayfishy;
 
-public class Minow extends Animal{
+public class Minow extends Animal {
+    ControlMethods controlMethods = new ControlMethods();
 
-    private String name;
-    private int health = 100;
-    private String gender;
-    public static int minowPrice = 30;
-
-
-    private void Minow(String name, String gender){
-        this.name = name;
-        this.gender =  gender;
-
+    public Minow() {
+        System.out.println(ControlMethods.enterName);
+        setName(controlMethods.inputString());
+        System.out.println("Insert gender");
+        setGender(controlMethods.inputString());
 
     }
+
+
 }

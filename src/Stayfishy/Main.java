@@ -7,9 +7,9 @@ public class Main {
         ControlMethods control = new ControlMethods();
 
         //menu.mainScreen();
-        //new Game();
+        new Game();
         //menu.mainMenu();
-        menu.fishMenu();
+        //menu.fishMenu();
         //menu.foodMenu();
 
 

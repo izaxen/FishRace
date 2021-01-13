@@ -10,7 +10,7 @@ public class Game {
     Store store = new Store();
     ControlMethods controlMethods = new ControlMethods();
     Scanner input = new Scanner(System.in);
-    public ArrayList<Players> contestants = new ArrayList<>();
+    public ArrayList<Player> contestants = new ArrayList<>();
 
 
     public Game() {
@@ -31,12 +31,12 @@ public class Game {
             if (inputInt > 0 && inputInt < 5) {
                 for (int i = 0; i < inputInt; i++) {
                     System.out.println("Enter new players name:");
-                    Players players = new Players(input.nextLine());
-                    contestants.add(players);
+                    Player player = new Player(input.nextLine());
+                    contestants.add(player);
                 }
 
             } else
-                ControlMethods.errorString();
+                System.out.println(ControlMethods.errorNumber);
 
 
         } while (!(inputInt > 0 && inputInt < 5));
@@ -48,7 +48,7 @@ public class Game {
                 gameRounds = inputInt;
 
             else
-                ControlMethods.errorString();
+                System.out.println(ControlMethods.errorNumber);
 
         } while (!(inputInt > 4 && inputInt < 31));
         gamePlay();
@@ -56,8 +56,8 @@ public class Game {
 
     private void gamePlay() {
         for (int i = 0; i < gameRounds; i++) {
-            gameRoundsLeft = gameRoundsLeft + 1;
-            for (Players player : contestants) {
+
+            for (Player player : contestants) {
 
                 menuSystem.mainMenu(player);
                 chooseAction(player);
@@ -68,7 +68,7 @@ public class Game {
 
     }
 
-    private void chooseAction(Players player) {
+    private void chooseAction(Player player) {
         int inputInt;
         do {
             inputInt = controlMethods.convertInputToInt();
@@ -76,7 +76,7 @@ public class Game {
                 switch (inputInt) {
                     case 1: {
                         menuSystem.fishMenu();
-                        store.buyFish(controlMethods.convertInputToInt());
+                        store.buyFish(controlMethods.convertInputToInt(), player);
                         break;
                     }
                     case 2: {
@@ -100,7 +100,7 @@ public class Game {
                     }
 
                     default: {
-                        ControlMethods.errorString();
+                        System.out.println(ControlMethods.errorNumber);
                     }
 
 

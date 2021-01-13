@@ -2,15 +2,15 @@ package Stayfishy;
 
 import java.util.ArrayList;
 
-public class Players {
+public class Player {
 
 
     private String name;
-    private int money = 1000;
-    private ArrayList<Animal> ownedFishes = new ArrayList();
+    private int money = 1100;
+    public ArrayList<Animal> ownedFishes = new ArrayList();
 
 
-    public Players(String name) {
+    public Player(String name) {
         this.name = name;
 
     }
@@ -25,5 +25,12 @@ public class Players {
 
     public String getName() {
         return name;
+    }
+
+    public void addNewFish(Animal toAdd){
+
+        ownedFishes.add(toAdd);
+
+
     }
 }

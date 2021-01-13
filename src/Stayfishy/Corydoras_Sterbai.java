@@ -1,15 +1,12 @@
 package Stayfishy;
 
-public class Corydoras_Sterbai {
-    private String name;
-    private int health = 100;
-    private String gender;
-    public static int corydorasPrice = 80;
+public class Corydoras_Sterbai extends Animal{
+    ControlMethods controlMethods = new ControlMethods();
 
+    public Corydoras_Sterbai(){
+        setName(controlMethods.inputString());
 
-    private void Corydoras_Sterbai(String name, String gender){
-        this.name = name;
-        this.gender =  gender;
+        setGender(controlMethods.inputString());
 
 
     }
