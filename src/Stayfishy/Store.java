@@ -41,7 +41,11 @@ public class Store {
                     maxFishTobuy = player.getMoney() / Animal.Fishprice.ANGELFISH.price;
 
                     if (maxFishTobuy > 0) {
-                        System.out.println("Ok to buy angel");
+                        System.out.println(ControlMethods.maxFishToBuy+maxFishTobuy);
+                        System.out.println(ControlMethods.enterQuantity);
+                        fishToBuy = controlMethods.convertInputToInt();
+                        for(int i = 0; i < (fishToBuy);i++)
+                            addNewfishes(player, new Angelfish());
                     } else {
                         System.out.println(ControlMethods.errorEnoghMoney);
                     }
@@ -50,7 +54,11 @@ public class Store {
                 case 4: {
                     maxFishTobuy =  player.getMoney() / Animal.Fishprice.PIRANHA.price;
                     if (Animal.Fishprice.PIRANHA.price < player.getMoney()) {
-                        System.out.println("Ok to buy Piranha");
+                        System.out.println(ControlMethods.maxFishToBuy+maxFishTobuy);
+                        System.out.println(ControlMethods.enterQuantity);
+                        fishToBuy = controlMethods.convertInputToInt();
+                        for(int i = 0; i < (fishToBuy);i++)
+                            addNewfishes(player, new Piranha());
                     } else {
                         System.out.println(ControlMethods.errorEnoghMoney);
                     }
@@ -58,7 +66,11 @@ public class Store {
                 }
                 case 5: {
                     if (Animal.Fishprice.HYPERANCISTRUS.price < player.getMoney()) {
-                        System.out.println("Ok to buy L046");
+                        System.out.println(ControlMethods.maxFishToBuy+maxFishTobuy);
+                        System.out.println(ControlMethods.enterQuantity);
+                        fishToBuy = controlMethods.convertInputToInt();
+                        for(int i = 0; i < (fishToBuy);i++)
+                            addNewfishes(player, new Hyperancistrus_Zebra());
                     } else {
                         System.out.println(ControlMethods.errorEnoghMoney);
                     }
@@ -78,6 +90,10 @@ public class Store {
     }
 
     public void addNewfishes(Player player, Animal toAdd) {
+        System.out.println(ControlMethods.enterName);
+        toAdd.setName(controlMethods.inputString());
+        System.out.println("Insert male or female if you want to choose or the shop will just pick a random");
+        toAdd.setGender(controlMethods.inputString()); //TODO lägg in ev en If sats med breed som inkommande
         player.ownedFishes.add(toAdd);
     }
 

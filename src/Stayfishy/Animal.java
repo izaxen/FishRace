@@ -44,6 +44,15 @@ abstract class Animal {
     }
 
     public void setGender(String gender) {
+
+
+        if ((!gender.equalsIgnoreCase("female")) && (!gender.equalsIgnoreCase("male")) || (gender.equalsIgnoreCase("breed")))
+        { if (!gender.equalsIgnoreCase("breed"))
+            {System.out.println("Since you didn´t make a correct choice the store just picks a random gender for you.");}
+
+            gender = (Math.random() < 0.5) ? "female" : "male";
+            System.out.printf("You got a %s%n",gender);
+        }
         this.gender = gender;
     }
 

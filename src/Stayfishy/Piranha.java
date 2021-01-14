@@ -1,10 +1,10 @@
 package Stayfishy;
 
-public class Piranha {
+public class Piranha extends Animal {
 
 
 
-    private void Piranha(){
+    public Piranha(){
 
     }
 }

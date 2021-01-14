@@ -1,9 +1,9 @@
 package Stayfishy;
 
-public class Hyperancistrus_Zebra {
+public class Hyperancistrus_Zebra extends Animal {
 
 
-    private void Hyperancistrus_Zebra(){
+    public Hyperancistrus_Zebra(){
 
 
     }
