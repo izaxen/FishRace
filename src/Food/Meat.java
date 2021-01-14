@@ -1,4 +1,4 @@
-package Stayfishy;
+package Food;
 
 public class Meat {
 }

@@ -1,4 +1,4 @@
-package Stayfishy;
+package Game;
 import java.util.*;
 public class ControlMethods {
     Scanner input = new Scanner(System.in);

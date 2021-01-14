@@ -1,4 +1,6 @@
-package Stayfishy;
+package Game;
+
+import Animals.Animal;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package Stayfishy;
+package Game;
 
 public class Main {
 
@@ -11,6 +11,7 @@ public class Main {
         //menu.mainMenu();
         //menu.fishMenu();
         //menu.foodMenu();
+        //menu.sellFishMenu();
 
 
     }

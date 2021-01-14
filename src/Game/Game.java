@@ -1,4 +1,6 @@
-package Stayfishy;
+package Game;
+import Animals.Animal;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -7,17 +9,14 @@ public class Game {
     private int gameRounds;
     public static int gameRoundsLeft;
     MenuSystem menuSystem = new MenuSystem();
-    Store store = new Store();
+    Store store = new Store(this);
     ControlMethods controlMethods = new ControlMethods();
     Scanner input = new Scanner(System.in);
     public ArrayList<Player> contestants = new ArrayList<>();
 
 
     public Game() {
-
         setupGame();
-
-
     }
 
     private void setupGame() {
@@ -56,57 +55,51 @@ public class Game {
 
     private void gamePlay() {
         for (int i = 0; i < gameRounds; i++) {
-
+            gameRoundsLeft = gameRoundsLeft + 1;
             for (Player player : contestants) {
 
                 menuSystem.mainMenu(player);
                 chooseAction(player);
-
-                //menuSystem.foodMenu(controlMethods.convertInputToInt()); Kalla på inkommande värde
             }
         }
-
     }
 
-    private void chooseAction(Player player) {
-        int inputInt;
+    public void chooseAction(Player player) {
+
         do {
             inputInt = controlMethods.convertInputToInt();
 
-                switch (inputInt) {
-                    case 1: {
-                        menuSystem.fishMenu();
-                        store.buyFish(controlMethods.convertInputToInt(), player);
-                        break;
-                    }
-                    case 2: {
-                        menuSystem.foodMenu(player);
-                        store.buyFood(controlMethods.convertInputToInt());
-                        break;
-                    }
+            switch (inputInt) {
+                case 1: {
+                    store.buyFish(player);
+                    break;
+                }
+                case 2: {
 
-                    case 3: {
-                        //Feed Fish
-                        break;
-                    }
+                    store.sellFishChoice(player);
 
-                    case 4: {
-                        //Breed fish
-                        System.out.println();
-                        break;
-                    }
-                    case 5: {
+                    break;
+                }
+                case 3: {
+                    //Buy food
+                    store.buyFood(controlMethods.convertInputToInt());
+                    break;
+                }
+                case 4: {
+                    //Feed fish
 
-                    }
-
-                    default: {
-                        System.out.println(ControlMethods.errorNumber);
-                    }
-
+                    break;
+                }
+                case 5: {
+                    //breed fish
 
                 }
 
-        } while ((inputInt < 1) || (inputInt >5));
-    }
+                default: {
+                    System.out.println(ControlMethods.errorNumber);
+                }
+            }
 
+        } while ((inputInt < 1) || (inputInt > 6));
+    }
 }
