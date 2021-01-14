@@ -12,7 +12,8 @@ public class Store {
 
     private int inputChoice;
     private Game mygame;
-    public Store(Game mygame){
+
+    public Store(Game mygame) {
 
         this.mygame = mygame;
 
@@ -56,7 +57,7 @@ public class Store {
                         break;
                     }
                     case 3: {
-                        maxFishTobuy = player.getMoney()/150;
+                        maxFishTobuy = player.getMoney() / 150;
 
                         if (maxFishTobuy > 0) {
                             System.out.println(ControlMethods.maxFishToBuy + maxFishTobuy);
@@ -83,7 +84,7 @@ public class Store {
                         break;
                     }
                     case 5: {
-                        maxFishTobuy = player.getMoney()/1050;
+                        maxFishTobuy = player.getMoney() / 1050;
                         if (maxFishTobuy > 0) {
                             System.out.println(ControlMethods.maxFishToBuy + maxFishTobuy);
                             System.out.println(ControlMethods.enterQuantity);
@@ -119,9 +120,10 @@ public class Store {
     }
 
     public void sellFishChoice(Player player) {
-        int index = 0;
+
 
         do {
+            int index = 0;
             menuSystem.sellFishMenu(player);
             inputChoice = controlMethods.convertInputToInt();
 
@@ -131,24 +133,47 @@ public class Store {
                     System.out.println("\n\nIndex\tType:\tName:\t\t\tGender:\tHealth:\tValue:\t");
                     System.out.println(MenuSystem.starRow + "\n");
                     for (Animal fish : player.ownedFishes) {
-                        //System.out.printf("%1$d\t\t%2$s\t\t\t%3$s\t\t\t%3$s\t%4$s%\t%5$d%%n",index,fish.getClass(), fish.getName(),
-                                //fish.getGender(), fish.getHealth());
-                        System.out.printf("%1$d\t\t%2$s\t\t%3$s\t\t%4$s\t\t%5$d\t\t%6$d%n",index,fish.getClass().getSimpleName(), fish.getName(), fish.getGender()
-                        , fish.getHealth(), fish.calculateValue());
+                        System.out.printf("%1$d\t\t%2$s\t\t%3$s\t\t%4$s\t\t%5$d\t\t%6$d%n", index, fish.getClass().getSimpleName(), fish.getName(), fish.getGender()
+                                , fish.getHealth(), fish.calculateValue());
                         index++;
-                                //,fish.calculateValue()
+
                     }
                     break;
                 }
                 case 2: {
-                    //Sell fish
+                    int convert = 0;
+                    System.out.println("Choose which fish you want to sell by their ID number\n" +
+                            "If you want to sell more then one fish just enter their ID after a blankspace");
+                    String[] numberAsString = controlMethods.inputString().split(" ");
+                    for(int i = player.ownedFishes.size()-1; i >= 0;i--){
+
+                    for (String testPrint : numberAsString) {
+                        try {
+                            convert = Integer.parseInt(testPrint);
+                        }
+                        catch (Exception e) { continue;   }
+                        if( i == convert)
+                        {System.out.println("Funka " + player.ownedFishes.get(i));
+                        player.ownedFishes.remove(i);
+                        if (i == 0){
+                        }break;
+                        }
+
+                    }
+
+
                 }
-                default:
-                    System.out.println(ControlMethods.errorNumber);
-            }
+                }
+
+            default:
+                System.out.println(ControlMethods.errorNumber);}
+
         } while (!(inputChoice == 3));
+
     }
 }
+
+
 
 
 
