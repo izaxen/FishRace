@@ -3,6 +3,18 @@ package Animals;
 import Game.Player;
 
 public abstract class Animal {
+    public enum Fishprice{
+        MINOW(30),
+        CORYDORAS_STERBAI(80),
+        ANGELFISH(150),
+        PIRANHA(300),
+        HYPERANCISTRUS_ZEBRA(1100);
+
+       public int price;
+       private Fishprice(int price){
+           this.price = price;
+       }
+    }
 
     private String name;
     private int health = 100;
@@ -39,15 +51,17 @@ public abstract class Animal {
 
     public void setGender(String gender) {
 
-
-        if ((!gender.equalsIgnoreCase("female")) && (!gender.equalsIgnoreCase("male")) || (gender.equalsIgnoreCase("breed"))) {
+        if ((!gender.equalsIgnoreCase("1")) && (!gender.equalsIgnoreCase("2")) || (gender.equalsIgnoreCase("breed"))) {
             if (!gender.equalsIgnoreCase("breed")) {
-                System.out.println("Since you didn´t make a correct choice the store just picks a random gender for you.");
+                System.out.println("The store picked a random gender");
             }
-
             gender = (Math.random() < 0.5) ? "female" : "male";
             System.out.printf("You got a %s%n", gender);
         }
+        if (gender.equalsIgnoreCase("1"))
+            gender = "female";
+        else  if (gender.equalsIgnoreCase("2"))
+            gender = "male";
         this.gender = gender;
     }
 

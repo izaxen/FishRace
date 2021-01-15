@@ -3,6 +3,6 @@ package Animals;
 public class Hyperancistrus_Zebra extends Animal {
 
     public Hyperancistrus_Zebra(){
-        setPrice(1100);
+        setPrice(Fishprice.HYPERANCISTRUS_ZEBRA.price);
     }
 }

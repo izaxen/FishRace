@@ -5,10 +5,9 @@ import Animals.*;
 
 
 public class Store {
-    int i = 0, fishToBuy, maxFishTobuy;
+    int fishToBuy, maxFishTobuy;
     ControlMethods controlMethods = new ControlMethods();
     MenuSystem menuSystem = new MenuSystem();
-    // Animal animal= new Animal();
 
     private int inputChoice;
     private Game mygame;
@@ -20,79 +19,74 @@ public class Store {
     }
 
     public void buyFish(Player player) {
-        menuSystem.fishMenu();
+        menuSystem.fishMenu(player.getMoney(), player);
         do {
-
 
             inputChoice = controlMethods.convertInputToInt();
 
             if ((inputChoice > 0) && (inputChoice < 6)) {
                 switch (inputChoice) {
                     case 1: {
-                        maxFishTobuy = player.getMoney() / 30;//TODO minizie IF to method and fix HARD Code for prize for all if
+                        maxFishTobuy = player.getMoney() / Animal.Fishprice.MINOW.price;
 
                         if (maxFishTobuy > 0) {
-                            System.out.println(ControlMethods.maxFishToBuy + maxFishTobuy);
-                            System.out.println(ControlMethods.enterQuantity);
-                            fishToBuy = controlMethods.convertInputToInt();
-                            for (int i = 0; i < (fishToBuy); i++)
-                                addNewfishes(player, new Minow());
+                            fishToBuy = mmaxFishToBuy(maxFishTobuy);
+                            for (int i = 0; i < (fishToBuy); i++){
+                                player.setMoney(player.getMoney()- Animal.Fishprice.MINOW.price);
+                                addNewfishes(player, new Minow());}
                         } else {
-                            System.out.println(ControlMethods.errorEnoghMoney);
+                            System.out.println(ControlMethods.errorOutOfStock);
                         }
                         break;
                     }
                     case 2: {
-                        maxFishTobuy = player.getMoney() / 80;
+                        maxFishTobuy = player.getMoney() / Animal.Fishprice.CORYDORAS_STERBAI.price;
                         if (maxFishTobuy > 0) {
-                            System.out.println(ControlMethods.maxFishToBuy + maxFishTobuy);
-                            System.out.println(ControlMethods.enterQuantity);
-                            fishToBuy = controlMethods.convertInputToInt();
-                            for (int i = 0; i < (fishToBuy); i++)
-                                addNewfishes(player, new Corydoras_Sterbai());
+                            fishToBuy = mmaxFishToBuy(maxFishTobuy);
+                            for (int i = 0; i < fishToBuy ; i++)
+                            {player.setMoney(player.getMoney() - Animal.Fishprice.CORYDORAS_STERBAI.price);
+                                addNewfishes(player, new Corydoras_Sterbai());}
 
                         } else {
-                            System.out.println(ControlMethods.errorEnoghMoney);
+                            System.out.println(ControlMethods.errorOutOfStock);
                         }
                         break;
                     }
                     case 3: {
-                        maxFishTobuy = player.getMoney() / 150;
+                        maxFishTobuy = player.getMoney() / Animal.Fishprice.ANGELFISH.price;
 
                         if (maxFishTobuy > 0) {
-                            System.out.println(ControlMethods.maxFishToBuy + maxFishTobuy);
-                            System.out.println(ControlMethods.enterQuantity);
-                            fishToBuy = controlMethods.convertInputToInt();
-                            for (int i = 0; i < (fishToBuy); i++)
-                                addNewfishes(player, new Angelfish());
+                            fishToBuy = mmaxFishToBuy(maxFishTobuy);
+                            for (int i = 0; i < (fishToBuy); i++){
+                                player.setMoney(player.getMoney()- Animal.Fishprice.ANGELFISH.price);
+                                addNewfishes(player, new Angelfish());}
                         } else {
-                            System.out.println(ControlMethods.errorEnoghMoney);
+                            System.out.println(ControlMethods.errorOutOfStock);
                         }
                         break;
                     }
                     case 4: {
-                        maxFishTobuy = player.getMoney() / 300;
+                        maxFishTobuy = player.getMoney() / Animal.Fishprice.PIRANHA.price;
                         if (maxFishTobuy > 0) {
-                            System.out.println(ControlMethods.maxFishToBuy + maxFishTobuy);
-                            System.out.println(ControlMethods.enterQuantity);
-                            fishToBuy = controlMethods.convertInputToInt();
-                            for (int i = 0; i < (fishToBuy); i++)
-                                addNewfishes(player, new Piranha());
+                                fishToBuy = mmaxFishToBuy(maxFishTobuy);
+                            for (int i = 0; i < (fishToBuy); i++){
+                                player.setMoney(player.getMoney()- Animal.Fishprice.PIRANHA.price);
+                                addNewfishes(player, new Piranha());}
                         } else {
-                            System.out.println(ControlMethods.errorEnoghMoney);
+                            System.out.println(ControlMethods.errorOutOfStock);
                         }
                         break;
                     }
                     case 5: {
-                        maxFishTobuy = player.getMoney() / 1050;
+                        maxFishTobuy = player.getMoney() / Animal.Fishprice.HYPERANCISTRUS_ZEBRA.price;
                         if (maxFishTobuy > 0) {
-                            System.out.println(ControlMethods.maxFishToBuy + maxFishTobuy);
-                            System.out.println(ControlMethods.enterQuantity);
-                            fishToBuy = controlMethods.convertInputToInt();
-                            for (int i = 0; i < (fishToBuy); i++)
-                                addNewfishes(player, new Hyperancistrus_Zebra());
+                            fishToBuy = mmaxFishToBuy(maxFishTobuy);
+                            for (int i = 0; i < (fishToBuy); i++){
+                                player.setMoney(player.getMoney()- Animal.Fishprice.HYPERANCISTRUS_ZEBRA.price);
+                                addNewfishes(player, new Hyperancistrus_Zebra());}
                         } else {
-                            System.out.println(ControlMethods.errorEnoghMoney);
+                            System.out.println(ControlMethods.errorOutOfStock);
+                            break;
                         }
                         break;
                     }
@@ -102,8 +96,6 @@ public class Store {
                     }
                 }
             }
-
-
         } while (inputChoice < 1);
     }
 
@@ -114,7 +106,7 @@ public class Store {
     public void addNewfishes(Player player, Animal toAdd) {
         System.out.println(ControlMethods.enterName);
         toAdd.setName(controlMethods.inputString());
-        System.out.println("Insert male or female if you want to choose or the shop will just pick a random");
+        System.out.println("Choose 1 for female and 2 for male if you want to specify gender else the shop will just pick a random");
         toAdd.setGender(controlMethods.inputString()); //TODO lägg in ev en If sats med breed som inkommande
         player.ownedFishes.add(toAdd);
     }
@@ -141,35 +133,41 @@ public class Store {
                     break;
                 }
                 case 2: {
-                    int convert = 0;
+                    int convert;
                     System.out.println("Choose which fish you want to sell by their ID number\n" +
                             "If you want to sell more then one fish just enter their ID after a blankspace");
                     String[] numberAsString = controlMethods.inputString().split(" ");
-                    for(int i = player.ownedFishes.size()-1; i >= 0;i--){
+                    for (int i = player.ownedFishes.size() - 1; i >= 0; i--) {
 
-                    for (String testPrint : numberAsString) {
-                        try {
-                            convert = Integer.parseInt(testPrint);
+                        for (String testPrint : numberAsString) {
+                            try {
+                                convert = Integer.parseInt(testPrint);
+                            } catch (Exception e) {
+                                continue;
+                            }
+                            if (i == convert) {
+                                player.setMoney((player.getMoney()) + player.ownedFishes.get(i).calculateValue());
+                                player.ownedFishes.remove(i);
+                                break;
+                            }
                         }
-                        catch (Exception e) { continue;   }
-                        if( i == convert)
-                        {System.out.println("Funka " + player.ownedFishes.get(i));
-                        player.ownedFishes.remove(i);
-                        if (i == 0){
-                        }break;
-                        }
-
                     }
-
-
+                    System.out.println("Player money after sell " + player.getMoney());
+                    break;
                 }
-                }
-
-            default:
-                System.out.println(ControlMethods.errorNumber);}
-
+                default:
+                    System.out.println(ControlMethods.errorNumber);
+            }
         } while (!(inputChoice == 3));
 
+    }
+    private int mmaxFishToBuy(int maxFishTobuy){
+        do{
+        System.out.println(ControlMethods.maxFishToBuy + maxFishTobuy);
+        System.out.println(ControlMethods.enterQuantity);
+        fishToBuy = controlMethods.convertInputToInt();
+        }while (( fishToBuy > maxFishTobuy) || (fishToBuy < 1));
+        return fishToBuy;
     }
 }
 

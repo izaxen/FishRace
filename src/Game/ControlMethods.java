@@ -6,7 +6,7 @@ public class ControlMethods {
     public static String enterName= "Please enter a name:";
     public static String enterQuantity = "Please enter the amount:";
     public static String errorNumber = "You have entered invalid number, enter a new:";
-    public static String errorEnoghMoney ="Sorry you don´t have enough money";
+    public static String errorOutOfStock ="Fish is out of stock\n\n";
     public static String maxFishToBuy = "Max fish to buy is ";
 
 
@@ -25,16 +25,8 @@ public class ControlMethods {
     public String inputString(){
         return input.nextLine();
     }
-    public String inputGender(){
-        System.out.println("Please input a gender");
-        String answer = inputString();
-        if ((!answer.equalsIgnoreCase("female")) || (!answer.equalsIgnoreCase("male")))
-        {
-            System.out.println();
-        }
 
-    return "";
-    }
+
 
 }
 

@@ -1,5 +1,4 @@
 package Game;
-import Animals.Animal;
 
 import java.util.ArrayList;
 import java.util.Scanner;

@@ -8,7 +8,7 @@ public class Player {
 
 
     private String name;
-    private int money = 1100;
+    private int money = 600;
     public ArrayList<Animal> ownedFishes = new ArrayList();
 
 
