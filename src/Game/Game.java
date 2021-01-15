@@ -1,5 +1,7 @@
 package Game;
 
+import Animals.Animal;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -52,10 +54,25 @@ public class Game {
         gamePlay();
     }
 
-    private void gamePlay() {
+    private void gamePlay() {//TODO Fixa loop om båda dör samtidigt
         for (int i = 0; i < gameRounds; i++) {
             gameRoundsLeft = gameRoundsLeft + 1;
             for (Player player : contestants) {
+
+                for (Animal fish : player.getOwnedFishes()) {
+                    fish.decreaseHealth();
+                }
+                for (i = player.getOwnedFishes().size() - 1; i >= 0; i--) {
+                    if (player.getOwnedFishes().get(i).getHealth() < 1) {
+                        System.out.println("You just killed " + player.getOwnedFishes().get(i).getName() + " of the type " +
+                                player.getOwnedFishes().get(i).getClass().getSimpleName());
+                        player.getOwnedFishes().remove(i);
+                    }
+                }
+                if((player.getOwnedFishes().size() == 0)&&(player.getMoney()==0))
+                {
+                    System.out.println("Player "+player.getName() +  " has no money or fish and is out of the game!\n" +
+                            "Next player"); continue;}
 
                 menuSystem.mainMenu(player);
                 chooseAction(player);

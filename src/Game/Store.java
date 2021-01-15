@@ -94,6 +94,8 @@ public class Store {
                         mygame.chooseAction(player);
                         break;
                     }
+                    case 7:
+                    { }
                 }
             }
         } while (inputChoice < 1);
@@ -106,9 +108,9 @@ public class Store {
     public void addNewfishes(Player player, Animal toAdd) {
         System.out.println(ControlMethods.enterName);
         toAdd.setName(controlMethods.inputString());
-        System.out.println("Choose 1 for female and 2 for male if you want to specify gender else the shop will just pick a random");
+        System.out.println("Choose [1] for female and [2] for male if you want to specify gender else the shop will just pick a random");
         toAdd.setGender(controlMethods.inputString()); //TODO lägg in ev en If sats med breed som inkommande
-        player.ownedFishes.add(toAdd);
+        player.getOwnedFishes().add(toAdd);
     }
 
     public void sellFishChoice(Player player) {
@@ -124,7 +126,7 @@ public class Store {
                 case 1: {
                     System.out.println("\n\nIndex\tType:\tName:\t\t\tGender:\tHealth:\tValue:\t");
                     System.out.println(MenuSystem.starRow + "\n");
-                    for (Animal fish : player.ownedFishes) {
+                    for (Animal fish : player.getOwnedFishes()) {
                         System.out.printf("%1$d\t\t%2$s\t\t%3$s\t\t%4$s\t\t%5$d\t\t%6$d%n", index, fish.getClass().getSimpleName(), fish.getName(), fish.getGender()
                                 , fish.getHealth(), fish.calculateValue());
                         index++;
@@ -137,7 +139,7 @@ public class Store {
                     System.out.println("Choose which fish you want to sell by their ID number\n" +
                             "If you want to sell more then one fish just enter their ID after a blankspace");
                     String[] numberAsString = controlMethods.inputString().split(" ");
-                    for (int i = player.ownedFishes.size() - 1; i >= 0; i--) {
+                    for (int i = player.getOwnedFishes().size() - 1; i >= 0; i--) {
 
                         for (String testPrint : numberAsString) {
                             try {
@@ -146,8 +148,8 @@ public class Store {
                                 continue;
                             }
                             if (i == convert) {
-                                player.setMoney((player.getMoney()) + player.ownedFishes.get(i).calculateValue());
-                                player.ownedFishes.remove(i);
+                                player.setMoney((player.getMoney()) + player.getOwnedFishes().get(i).calculateValue());
+                                player.getOwnedFishes().remove(i);
                                 break;
                             }
                         }

@@ -9,7 +9,9 @@ public class Player {
 
     private String name;
     private int money = 600;
-    public ArrayList<Animal> ownedFishes = new ArrayList();
+
+
+    private ArrayList<Animal> ownedFishes = new ArrayList();
 
 
     public Player(String name) {
@@ -29,10 +31,12 @@ public class Player {
         return name;
     }
 
-    public void addNewFish(Animal toAdd){
+    public void addNewFish(Animal toAdd) {
 
         ownedFishes.add(toAdd);
+    }
 
-
+    public ArrayList<Animal> getOwnedFishes() {
+        return ownedFishes;
     }
 }

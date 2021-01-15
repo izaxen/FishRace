@@ -2,12 +2,14 @@ package Animals;
 
 import Game.Player;
 
+import java.util.Random;
+
 public abstract class Animal {
     public enum Fishprice{
         MINOW(30),
         CORYDORAS_STERBAI(80),
         ANGELFISH(150),
-        PIRANHA(300),
+         PIRANHA(300),
         HYPERANCISTRUS_ZEBRA(1100);
 
        public int price;
@@ -69,6 +71,13 @@ public abstract class Animal {
     private void breedAnimals() {
 
     }
+    public void decreaseHealth(){
+        Random random = new Random();
+        this.health = this.health - (random.ints(10,31).findFirst().getAsInt());
+        System.out.println(this.health + " in health left for " + this.getName() + ". Of the type " + this.getClass().getSimpleName()+ "\n");
+        }
+
+
 
     public int calculateValue() {
 
