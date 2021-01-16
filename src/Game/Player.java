@@ -9,6 +9,8 @@ public class Player {
 
     private String name;
     private int money = 600;
+    private boolean playerActive = true;
+    private boolean playerRoundChoice = true;
 
 
     private ArrayList<Animal> ownedFishes = new ArrayList();
@@ -31,12 +33,44 @@ public class Player {
         return name;
     }
 
-    public void addNewFish(Animal toAdd) {
+    public void addNewFish(Animal toAdd) {//TODO SKALL DENNA ANVÄNDAS?
 
         ownedFishes.add(toAdd);
     }
 
     public ArrayList<Animal> getOwnedFishes() {
         return ownedFishes;
+    }
+
+    public boolean isPlayerActive() {
+        return playerActive;
+    }
+
+    public void setPlayerActive(boolean playerActive) {
+        this.playerActive = playerActive;
+    }
+
+    public boolean isPlayerRoundChoice() {
+        return playerRoundChoice;
+    }
+
+    public void setPlayerRoundChoice(boolean playerRoundChoice) {
+        this.playerRoundChoice = playerRoundChoice;
+    }
+
+    public void deathLoop() {
+
+        for (int i = this.getOwnedFishes().size() - 1; i >= 0; i--) {
+            if (this.getOwnedFishes().get(i).getHealth() < 1) {
+                System.out.println("You just killed " + this.getOwnedFishes().get(i).getName() + " of the type " +
+                        this.getOwnedFishes().get(i).getClass().getSimpleName());
+                this.getOwnedFishes().remove(i);
+            }
+        }
+        if((this.getOwnedFishes().size() == 0)&&(this.getMoney()==0))
+        {
+
+        playerActive = false;}
+
     }
 }

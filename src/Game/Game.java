@@ -9,11 +9,10 @@ public class Game {
     private int inputInt;
     private int gameRounds;
     public static int gameRoundsLeft;
-    MenuSystem menuSystem = new MenuSystem();
-    Store store = new Store(this);
-    ControlMethods controlMethods = new ControlMethods();
-    Scanner input = new Scanner(System.in);
     public ArrayList<Player> contestants = new ArrayList<>();
+    Store store = new Store(this);
+    MenuSystem menuSystem = new MenuSystem();
+    ControlMethods controlMethods = new ControlMethods();
 
 
     public Game() {
@@ -30,8 +29,8 @@ public class Game {
             inputInt = controlMethods.convertInputToInt();
             if (inputInt > 0 && inputInt < 5) {
                 for (int i = 0; i < inputInt; i++) {
-                    System.out.println("Enter new players name:");
-                    Player player = new Player(input.nextLine());
+                    System.out.printf("Enter player %d name:%n",i+1);
+                    Player player = new Player(controlMethods.inputString());
                     contestants.add(player);
                 }
 
@@ -59,23 +58,21 @@ public class Game {
             gameRoundsLeft = gameRoundsLeft + 1;
             for (Player player : contestants) {
 
-                for (Animal fish : player.getOwnedFishes()) {
-                    fish.decreaseHealth();
-                }
-                for (i = player.getOwnedFishes().size() - 1; i >= 0; i--) {
-                    if (player.getOwnedFishes().get(i).getHealth() < 1) {
-                        System.out.println("You just killed " + player.getOwnedFishes().get(i).getName() + " of the type " +
-                                player.getOwnedFishes().get(i).getClass().getSimpleName());
-                        player.getOwnedFishes().remove(i);
+                if (player.isPlayerActive()) {
+                    for (Animal fish : player.getOwnedFishes()) {
+                        fish.decreaseHealth();
                     }
+                    player.deathLoop();
                 }
-                if((player.getOwnedFishes().size() == 0)&&(player.getMoney()==0))
-                {
-                    System.out.println("Player "+player.getName() +  " has no money or fish and is out of the game!\n" +
-                            "Next player"); continue;}
 
-                menuSystem.mainMenu(player);
-                chooseAction(player);
+                if (player.isPlayerActive()) {
+
+                    menuSystem.mainMenu(player);
+                    chooseAction(player);
+                }
+                else
+                    System.out.println(player.getName() + " is out of the game\n" +
+                            "Next player");
             }
         }
     }

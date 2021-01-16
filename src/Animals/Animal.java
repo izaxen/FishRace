@@ -5,17 +5,18 @@ import Game.Player;
 import java.util.Random;
 
 public abstract class Animal {
-    public enum Fishprice{
+    public enum Fishprice {
         MINOW(30),
         CORYDORAS_STERBAI(80),
         ANGELFISH(150),
-         PIRANHA(300),
+        PIRANHA(300),
         HYPERANCISTRUS_ZEBRA(1100);
 
-       public int price;
-       private Fishprice(int price){
-           this.price = price;
-       }
+        public int price;
+
+        private Fishprice(int price) {
+            this.price = price;
+        }
     }
 
     private String name;
@@ -62,7 +63,7 @@ public abstract class Animal {
         }
         if (gender.equalsIgnoreCase("1"))
             gender = "female";
-        else  if (gender.equalsIgnoreCase("2"))
+        else if (gender.equalsIgnoreCase("2"))
             gender = "male";
         this.gender = gender;
     }
@@ -71,19 +72,18 @@ public abstract class Animal {
     private void breedAnimals() {
 
     }
-    public void decreaseHealth(){
+
+    public void decreaseHealth() {
         Random random = new Random();
-        this.health = this.health - (random.ints(10,31).findFirst().getAsInt());
-        System.out.println(this.health + " in health left for " + this.getName() + ". Of the type " + this.getClass().getSimpleName()+ "\n");
+        this.health = this.health - (random.ints(10, 31).findFirst().getAsInt());
+        if (this.health > 0) {
+            System.out.println(this.health + " in health left for " + this.getName() + ". Of the type " + this.getClass().getSimpleName() + "\n");
         }
-
-
-
-    public int calculateValue() {
-
-        return ((this.getHealth() * this.getPrice()) / 100);
     }
 
 
+    public int calculateValue() {
+        return ((this.getHealth() * this.getPrice()) / 100);
+   }
 }
 
