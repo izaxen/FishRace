@@ -1,20 +1,23 @@
 package Game;
 
 import Animals.Animal;
-
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Game {
     private int inputInt;
     private int gameRounds;
     public static int gameRoundsLeft;
-    public ArrayList<Player> contestants = new ArrayList<>();
+
+    private ArrayList<Player> contestants = new ArrayList<>();
+
     Store store = new Store(this);
     MenuSystem menuSystem = new MenuSystem();
     ControlMethods controlMethods = new ControlMethods();
 
 
+    public ArrayList<Player> getContestants() {
+        return contestants;
+    }
     public Game() {
         setupGame();
     }
@@ -53,14 +56,14 @@ public class Game {
         gamePlay();
     }
 
-    private void gamePlay() {//TODO Fixa loop om båda dör samtidigt
+    private void gamePlay() {
         for (int i = 0; i < gameRounds; i++) {
             gameRoundsLeft = gameRoundsLeft + 1;
             for (Player player : contestants) {
 
                 if (player.isPlayerActive()) {
                     for (Animal fish : player.getOwnedFishes()) {
-                        fish.decreaseHealth();
+                        fish.decreaseHealthAndAge();
                     }
                     player.deathLoop();
                 }
@@ -75,6 +78,7 @@ public class Game {
                             "Next player");
             }
         }
+        store.sellAllFishEndGame();
     }
 
     public void chooseAction(Player player) {
@@ -115,4 +119,8 @@ public class Game {
 
         } while ((inputInt < 1) || (inputInt > 6));
     }
+    public void endGameScoreList(){//TODO Sort end game
+
+    }
+
 }

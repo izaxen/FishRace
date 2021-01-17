@@ -3,6 +3,7 @@ package Game;
 import Animals.Animal;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Player {
 
@@ -66,11 +67,23 @@ public class Player {
                         this.getOwnedFishes().get(i).getClass().getSimpleName());
                 this.getOwnedFishes().remove(i);
             }
+            else if(this.getOwnedFishes().get(i).getAgeFish() > this.getOwnedFishes().get(i).getMaxAgeFish()){
+                System.out.println(this.getOwnedFishes().get(i).getName() + " of the type " +
+                        this.getOwnedFishes().get(i).getClass().getSimpleName()+ " died because of age!");
+                this.getOwnedFishes().remove(i);
+            }
         }
         if((this.getOwnedFishes().size() == 0)&&(this.getMoney()==0))
         {
 
         playerActive = false;}
 
+    }
+    public int compareTo(Player player){
+        int compareMoney = ((Player)player).getMoney();
+        return this.money-compareMoney;
+    }
+    public String toString(){
+        return "Winner " + name +" with " + money;
     }
 }

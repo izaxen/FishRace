@@ -1,4 +1,4 @@
 package Food;
 
-public class Tetrabits {
+public class Tetrabits extends Food{
 }
