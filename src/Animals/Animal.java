@@ -34,6 +34,35 @@ public abstract class Animal {
     private boolean tetrabits = false;
     private boolean meat = false;
     private boolean breeded = false;
+    private int healthBoostFlakes;
+    private int HealthBoostTetrabits;
+    private int HealthBoostMeat;
+
+    public int getHealthBoostFlakes() {
+        return healthBoostFlakes;
+    }
+
+    public void setHealthBoostFlakes(int healthBoostFlakes) {
+        this.healthBoostFlakes = healthBoostFlakes;
+    }
+
+    public int getHealthBoostTetrabits() {
+        return HealthBoostTetrabits;
+    }
+
+    public void setHealthBoostTetrabits(int healthBoostTetrabits) {
+        HealthBoostTetrabits = healthBoostTetrabits;
+    }
+
+    public int getHealthBoostMeat() {
+        return HealthBoostMeat;
+    }
+
+    public void setHealthBoostMeat(int healthBoostMeat) {
+        HealthBoostMeat = healthBoostMeat;
+    }
+
+
 
     public int getAgeFish() {
         return ageFish;
@@ -129,8 +158,8 @@ public abstract class Animal {
 
     public void decreaseHealthAndAge() {
         Random random = new Random();
-        this.health = this.health - (random.ints(10, 31).findFirst().getAsInt());
-        //this.health = this.health - (int) (Math.random() * (31-10))*3;
+        //this.health = this.health - (random.ints(10, 31).findFirst().getAsInt());
+        this.health -=  (int) (Math.random() * (20))+10;
         this.ageFish = this.ageFish + 1;
         if ((this.health > 0) && (this.ageFish <= this.maxAgeFish)) {
             System.out.println(this.health + " in health left for " + this.getName() + ". Of the type " + this.getClass().getSimpleName() + "" +

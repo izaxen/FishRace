@@ -102,12 +102,19 @@ public class Player {
             switch (inputChoice) {
                 case 1: {
                     for (Animal feedFish : player.getOwnedFishes()) {
+
                         if (feedFish.isFlakes()) {
-                            if (player.getOwnedFood()[0].getQuantityFood() > 0) {
+                            if (feedFish.getHealth() > 99) {
+                                System.out.println(feedFish.getName() + " of the type " + feedFish.getClass().getSimpleName() + " already has full health no need for more food");
+                            } else if (player.getOwnedFood()[0].getQuantityFood() > 0) {
                                 System.out.println("Do you want to feed " + feedFish.getName() + " of the type " + feedFish.getClass().getSimpleName());
                                 System.out.println("If you don´t want to feed the fish type NO else just press enter");
                                 if (!controlMethods.inputString().equalsIgnoreCase("no")) {
                                     player.getOwnedFood()[0].setQuantityFood(player.getOwnedFood()[0].getQuantityFood() - 1);
+                                    feedFish.setHealth(feedFish.getHealthBoostFlakes() + feedFish.getHealth());
+                                    if (feedFish.getHealth() > 100){
+                                        feedFish.setHealth(100);
+                                    }
                                 }
                             } else {
                                 System.out.println(Food.FoodPrice.FLAKES + " is" + ControlMethods.errorOutOfStock + ". And " + feedFish.getName() + " starved");
@@ -119,11 +126,16 @@ public class Player {
                 case 2: {
                     for (Animal feedFish : player.getOwnedFishes()) {
                         if (feedFish.isTetrabits()) {
-                            if (player.getOwnedFood()[0].getQuantityFood() > 0) {
+                            if (feedFish.getHealth() > 99) {
+                                System.out.println(feedFish.getName() + " of the type " + feedFish.getClass().getSimpleName() + " already has full health no need for more food");
+                            } else if (player.getOwnedFood()[0].getQuantityFood() > 0) {
                                 System.out.println("Do you want to feed " + feedFish.getName() + " of the type " + feedFish.getClass().getSimpleName());
                                 System.out.println("If you don´t want to feed the fish type NO else just press enter");
                                 if (!controlMethods.inputString().equalsIgnoreCase("no")) {
                                     player.getOwnedFood()[0].setQuantityFood(player.getOwnedFood()[0].getQuantityFood() - 1);
+                                    feedFish.setHealth(feedFish.getHealthBoostFlakes() + feedFish.getHealth());
+                                    if (feedFish.getHealth() > 100){
+                                        feedFish.setHealth(100);}
                                 }
                             } else {
                                 System.out.println(Food.FoodPrice.TETRABITS + " is" + ControlMethods.errorOutOfStock + ". And " + feedFish.getName() + " starved");
@@ -135,11 +147,18 @@ public class Player {
                 case 3: {
                     for (Animal feedFish : player.getOwnedFishes()) {
                         if (feedFish.isMeat()) {
+                            if (feedFish.getHealth() > 99) {
+                                System.out.println(feedFish.getName() + " of the type " + feedFish.getClass().getSimpleName() + " already has full health no need for more food");
+                            }
+
                             if (player.getOwnedFood()[0].getQuantityFood() > 0) {
                                 System.out.println("Do you want to feed " + feedFish.getName() + " of the type " + feedFish.getClass().getSimpleName());
                                 System.out.println("If you don´t want to feed the fish type NO else just press enter");
                                 if (!controlMethods.inputString().equalsIgnoreCase("no")) {
                                     player.getOwnedFood()[0].setQuantityFood(player.getOwnedFood()[0].getQuantityFood() - 1);
+                                    feedFish.setHealth(feedFish.getHealthBoostFlakes() + feedFish.getHealth());
+                                    if (feedFish.getHealth() > 100){
+                                        feedFish.setHealth(100);}
                                 }
                             } else {
                                 System.out.println(Food.FoodPrice.MEAT + " is" + ControlMethods.errorOutOfStock + ". And " + feedFish.getName() + " starved");

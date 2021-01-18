@@ -46,7 +46,7 @@ public class MenuSystem {
                 "* Playername: %2$s\t\t\t\t\t\t\tBank: %3$skr*%n%1$s%n", starRow, player.getName(), player.getMoney(), Game.gameRoundsLeft);
 
         if (availableMoney >= Animal.Fishprice.MINNOW.fishPrice)
-            System.out.println("* [1] Buy " + Animal.Fishprice.MINNOW + "\t".repeat(8) + Animal.Fishprice.MINNOW.fishPrice + " kr\t\t\t*");
+            System.out.println("* [1] Buy " + Animal.Fishprice.MINNOW + "\t".repeat(7) + Animal.Fishprice.MINNOW.fishPrice + " kr\t\t\t*");
         else
             System.out.println("* [ ] " + Animal.Fishprice.MINNOW + "\t".repeat(9) + "Out of stock\t*");
 

@@ -8,6 +8,9 @@ public class Angelfish extends Animal {
         setTetrabits(true);
         setMeat(true);
         setMaxAgeFish(10);
+        setHealthBoostFlakes(5);
+        setHealthBoostTetrabits(20);
+        setHealthBoostMeat(10);
 
     }
 }

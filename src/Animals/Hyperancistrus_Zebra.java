@@ -7,5 +7,7 @@ public class Hyperancistrus_Zebra extends Animal {
         setTetrabits(true);
         setMeat(true);
         setMaxAgeFish(10);
+        setHealthBoostTetrabits(15);
+        setHealthBoostMeat(20);
     }
 }

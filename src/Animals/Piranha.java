@@ -6,5 +6,6 @@ public class Piranha extends Animal {
         setPrice(Fishprice.PIRANHA.fishPrice);
         setMeat(true);
         setMaxAgeFish(30);
+        setHealthBoostMeat(30);
     }
 }
