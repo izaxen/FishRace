@@ -129,8 +129,8 @@ public abstract class Animal {
 
     public void decreaseHealthAndAge() {
         Random random = new Random();
-        //this.health = this.health - (random.ints(10, 31).findFirst().getAsInt());
-        this.health = this.health - (int) (Math.random() * (31-10))*10;
+        this.health = this.health - (random.ints(10, 31).findFirst().getAsInt());
+        //this.health = this.health - (int) (Math.random() * (31-10))*3;
         this.ageFish = this.ageFish + 1;
         if ((this.health > 0) && (this.ageFish <= this.maxAgeFish)) {
             System.out.println(this.health + " in health left for " + this.getName() + ". Of the type " + this.getClass().getSimpleName() + "" +

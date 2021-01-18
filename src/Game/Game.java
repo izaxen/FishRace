@@ -2,6 +2,7 @@ package Game;
 
 import Animals.Animal;
 import java.util.ArrayList;
+import Food.*;
 
 public class Game {
     private int inputInt;
@@ -88,11 +89,12 @@ public class Game {
 
             switch (inputInt) {
                 case 1: {
+                    // Buy fish
                     store.buyFish(player);
                     break;
                 }
                 case 2: {
-
+                    //Sell fish
                     store.sellFishChoice(player);
 
                     break;
@@ -104,6 +106,8 @@ public class Game {
                 }
                 case 4: {
                     //Feed fish
+                    player.feedYourFish(player);
+
 
                     break;
                 }

@@ -114,8 +114,9 @@ public class Store {
         System.out.println("Choose [1] for female and [2] for male if you want to specify gender else the shop will just pick a random");
         toAdd.setGender(controlMethods.inputString()); //TODO lägg in ev en If sats med breed som inkommande
         player.getOwnedFishes().add(toAdd);
+        System.out.println(toAdd.getName() + " of the type "+ toAdd.getClass().getSimpleName() +" has been added to your owned fish.\n");
 
-        System.out.println(toAdd.isFlakes());
+
     }
 
     public void sellFishChoice(Player player) {

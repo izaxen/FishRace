@@ -1,5 +1,7 @@
 package Food;
 
+import Game.Player;
+
 public abstract class Food {
     public enum FoodPrice {
         FLAKES(2),
@@ -34,4 +36,5 @@ public abstract class Food {
     public int getPrice() {
         return price;
     }
-}
+
+    }

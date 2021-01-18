@@ -104,4 +104,14 @@ public class MenuSystem {
                         "* [2] Choose fish to sell\n" +
                         "* [3] End round");
     }
+    public void feedFishMenu(Player player){
+
+        System.out.printf("%1$s%n* \t\t\t\t\tStayfishy fish menu\t\t\tRound: %4$d\t*%n" +
+                "* Playername: %2$s\t\t\t\t\t\t\tBank: %3$skr*%n%1$s%n", starRow, player.getName(), player.getMoney(), Game.gameRoundsLeft);
+        System.out.println("* [1] Feed fish with "+ Food.FoodPrice.FLAKES + "\t".repeat(5) + "Available: "+ player.getOwnedFood()[0].getQuantityFood()+"\t*");
+        System.out.println("* [2] Feed fish with "+ Food.FoodPrice.TETRABITS+ "\t".repeat(4) + "Available: "+player.getOwnedFood()[1].getQuantityFood()+"\t*");
+        System.out.println("* [3] Feed fish with "+Food.FoodPrice.MEAT + "\t".repeat(5) + "Available: "+ player.getOwnedFood()[2].getQuantityFood()+"\t*");
+
+
+    }
 }
