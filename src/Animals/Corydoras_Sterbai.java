@@ -3,8 +3,9 @@ package Animals;
 public class Corydoras_Sterbai extends Animal {
 
     public Corydoras_Sterbai(){
-        setPrice(Fishprice.CORYDORAS_STERBAI.price);
+        setPrice(Fishprice.CORYDORAS_STERBAI.fishPrice);
         setFlakes(true);
         setTetrabits(true);
+        setMaxAgeFish(20);
     }
 }

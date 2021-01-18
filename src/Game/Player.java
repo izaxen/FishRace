@@ -1,9 +1,8 @@
 package Game;
 
 import Animals.Animal;
-
+import Food.*;
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class Player {
 
@@ -15,6 +14,19 @@ public class Player {
 
 
     private ArrayList<Animal> ownedFishes = new ArrayList();
+
+    public Food[] getOwnedFood() {
+        return ownedFood;
+    }
+
+    public void setOwnedFood(Food[] ownedFood) {
+        this.ownedFood = ownedFood;
+    }
+
+    private Food[] ownedFood = {
+            new Flakes(),
+            new Tetrabits(),
+            new Meat()};
 
 
     public Player(String name) {

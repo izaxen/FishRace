@@ -1,21 +1,19 @@
 package Animals;
 
-import Game.Player;
-
 import java.util.Random;
 
 public abstract class Animal {
     public enum Fishprice {
-        MINOW(30),
+        MINNOW(30),
         CORYDORAS_STERBAI(80),
         ANGELFISH(150),
         PIRANHA(300),
         HYPERANCISTRUS_ZEBRA(1100);
 
-        public int price;
+        public int fishPrice;
 
-        private Fishprice(int price) {
-            this.price = price;
+        Fishprice(int fishPrice) {
+            this.fishPrice = fishPrice;
         }
     }
 
@@ -131,7 +129,8 @@ public abstract class Animal {
 
     public void decreaseHealthAndAge() {
         Random random = new Random();
-        this.health = this.health - (random.ints(10, 31).findFirst().getAsInt());
+        //this.health = this.health - (random.ints(10, 31).findFirst().getAsInt());
+        this.health = this.health - (int) (Math.random() * (31-10))*10;
         this.ageFish = this.ageFish + 1;
         if ((this.health > 0) && (this.ageFish <= this.maxAgeFish)) {
             System.out.println(this.health + " in health left for " + this.getName() + ". Of the type " + this.getClass().getSimpleName() + "" +
@@ -142,7 +141,7 @@ public abstract class Animal {
 
     public int calculateValue() {
         int calculatedValue = 0;
-        if (this instanceof Minow) {
+        if (this instanceof Minnow) {
             if (this.ageFish == 1)
                 calculatedValue = (int) (((this.getHealth() * this.getPrice()) / 100) * 1.2);
             else if (this.ageFish == 2)
@@ -187,10 +186,10 @@ public abstract class Animal {
         if (this instanceof Piranha) {
             if (this.ageFish < 3)
                 calculatedValue = (int) (((this.getHealth() * this.getPrice()) / 100) * 1.0);
-            else if (this.ageFish < 5)
+            else if (this.ageFish < 10)
                 calculatedValue = (int) (((this.getHealth() * this.getPrice()) / 100) * 0.9);
-            else if (this.ageFish >= 5)
-                calculatedValue = (int) (((this.getHealth() * this.getPrice()) / 100) * 0.8);
+            else if (this.ageFish >= 10)
+                calculatedValue = (int) (((this.getHealth() * this.getPrice()) / 100) * 0.6);
 
             if (calculatedValue < 51)
                 calculatedValue = 50;

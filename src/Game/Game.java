@@ -99,7 +99,7 @@ public class Game {
                 }
                 case 3: {
                     //Buy food
-                    store.buyFood(controlMethods.convertInputToInt());
+                    store.buyFood(player);
                     break;
                 }
                 case 4: {

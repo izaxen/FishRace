@@ -3,10 +3,11 @@ package Animals;
 public class Angelfish extends Animal {
 
     public Angelfish(){
-        setPrice(Fishprice.ANGELFISH.price);
+        setPrice(Fishprice.ANGELFISH.fishPrice);
         setFlakes(true);
         setTetrabits(true);
         setMeat(true);
+        setMaxAgeFish(10);
 
     }
 }

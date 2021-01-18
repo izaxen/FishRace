@@ -1,12 +1,11 @@
 package Game;
 
 import Animals.*;
-
-import java.util.Collections;
+import Food.Food;
 
 
 public class Store {
-    int fishToBuy, maxFishTobuy;
+    int fishToBuy, maxFishTobuy, foodToBuy, maxFoodToBuy;
     ControlMethods controlMethods = new ControlMethods();
     MenuSystem menuSystem = new MenuSystem();
 
@@ -28,13 +27,13 @@ public class Store {
             if ((inputChoice > 0) && (inputChoice < 6)) {
                 switch (inputChoice) {
                     case 1: {
-                        maxFishTobuy = player.getMoney() / Animal.Fishprice.MINOW.price;
+                        maxFishTobuy = player.getMoney() / Animal.Fishprice.MINNOW.fishPrice;
 
                         if (maxFishTobuy > 0) {
-                            fishToBuy = mmaxFishToBuy(maxFishTobuy);
+                            fishToBuy = maxFishToBuy(maxFishTobuy);
                             for (int i = 0; i < (fishToBuy); i++) {
-                                player.setMoney(player.getMoney() - Animal.Fishprice.MINOW.price);
-                                addNewfishes(player, new Minow());
+                                player.setMoney(player.getMoney() - Animal.Fishprice.MINNOW.fishPrice);
+                                addNewfishes(player, new Minnow());
 
                             }
                         } else {
@@ -43,11 +42,11 @@ public class Store {
                         break;
                     }
                     case 2: {
-                        maxFishTobuy = player.getMoney() / Animal.Fishprice.CORYDORAS_STERBAI.price;
+                        maxFishTobuy = player.getMoney() / Animal.Fishprice.CORYDORAS_STERBAI.fishPrice;
                         if (maxFishTobuy > 0) {
-                            fishToBuy = mmaxFishToBuy(maxFishTobuy);
+                            fishToBuy = maxFishToBuy(maxFishTobuy);
                             for (int i = 0; i < fishToBuy; i++) {
-                                player.setMoney(player.getMoney() - Animal.Fishprice.CORYDORAS_STERBAI.price);
+                                player.setMoney(player.getMoney() - Animal.Fishprice.CORYDORAS_STERBAI.fishPrice);
                                 addNewfishes(player, new Corydoras_Sterbai());
                             }
 
@@ -57,12 +56,12 @@ public class Store {
                         break;
                     }
                     case 3: {
-                        maxFishTobuy = player.getMoney() / Animal.Fishprice.ANGELFISH.price;
+                        maxFishTobuy = player.getMoney() / Animal.Fishprice.ANGELFISH.fishPrice;
 
                         if (maxFishTobuy > 0) {
-                            fishToBuy = mmaxFishToBuy(maxFishTobuy);
+                            fishToBuy = maxFishToBuy(maxFishTobuy);
                             for (int i = 0; i < (fishToBuy); i++) {
-                                player.setMoney(player.getMoney() - Animal.Fishprice.ANGELFISH.price);
+                                player.setMoney(player.getMoney() - Animal.Fishprice.ANGELFISH.fishPrice);
                                 addNewfishes(player, new Angelfish());
                             }
                         } else {
@@ -71,11 +70,11 @@ public class Store {
                         break;
                     }
                     case 4: {
-                        maxFishTobuy = player.getMoney() / Animal.Fishprice.PIRANHA.price;
+                        maxFishTobuy = player.getMoney() / Animal.Fishprice.PIRANHA.fishPrice;
                         if (maxFishTobuy > 0) {
-                            fishToBuy = mmaxFishToBuy(maxFishTobuy);
+                            fishToBuy = maxFishToBuy(maxFishTobuy);
                             for (int i = 0; i < (fishToBuy); i++) {
-                                player.setMoney(player.getMoney() - Animal.Fishprice.PIRANHA.price);
+                                player.setMoney(player.getMoney() - Animal.Fishprice.PIRANHA.fishPrice);
                                 addNewfishes(player, new Piranha());
                             }
                         } else {
@@ -84,11 +83,11 @@ public class Store {
                         break;
                     }
                     case 5: {
-                        maxFishTobuy = player.getMoney() / Animal.Fishprice.HYPERANCISTRUS_ZEBRA.price;
+                        maxFishTobuy = player.getMoney() / Animal.Fishprice.HYPERANCISTRUS_ZEBRA.fishPrice;
                         if (maxFishTobuy > 0) {
-                            fishToBuy = mmaxFishToBuy(maxFishTobuy);
+                            fishToBuy = maxFishToBuy(maxFishTobuy);
                             for (int i = 0; i < (fishToBuy); i++) {
-                                player.setMoney(player.getMoney() - Animal.Fishprice.HYPERANCISTRUS_ZEBRA.price);
+                                player.setMoney(player.getMoney() - Animal.Fishprice.HYPERANCISTRUS_ZEBRA.fishPrice);
                                 addNewfishes(player, new Hyperancistrus_Zebra());
                             }
                         } else {
@@ -108,9 +107,6 @@ public class Store {
         } while (inputChoice < 1);
     }
 
-    public void buyFood(int inputChoice) {
-
-    }
 
     public void addNewfishes(Player player, Animal toAdd) {
         System.out.println(ControlMethods.enterName);
@@ -173,13 +169,65 @@ public class Store {
 
     }
 
-    private int mmaxFishToBuy(int maxFishTobuy) {
+    public void buyFood(Player player) {
+
         do {
-            System.out.println(ControlMethods.maxFishToBuy + maxFishTobuy);
+            menuSystem.foodMenu(player.getMoney(), player);
+            inputChoice = controlMethods.convertInputToInt();
+            switch (inputChoice) {
+                case 1: {
+                    maxFoodToBuy = player.getMoney() / Food.FoodPrice.FLAKES.foodPrice;
+                    if (maxFoodToBuy > 0) {
+                        foodToBuy = maxFoodToBuy(maxFoodToBuy);
+                        player.setMoney(player.getMoney() - (Food.FoodPrice.FLAKES.foodPrice * foodToBuy));
+                        player.getOwnedFood()[0].setQuantityFood(player.getOwnedFood()[0].getQuantityFood() + foodToBuy);
+                        System.out.println("You have bought "+foodToBuy+" new "+ Food.FoodPrice.FLAKES);
+                    }
+                    break;
+                }
+                case 2: {
+                    maxFoodToBuy = player.getMoney() / Food.FoodPrice.TETRABITS.foodPrice;
+                    if (maxFoodToBuy > 0) {
+                        foodToBuy = maxFoodToBuy(maxFoodToBuy);
+                        player.setMoney(player.getMoney() - (Food.FoodPrice.TETRABITS.foodPrice * foodToBuy));
+                        player.getOwnedFood()[1].setQuantityFood(player.getOwnedFood()[1].getQuantityFood() + foodToBuy);
+                        System.out.println("You have bought "+foodToBuy+" new "+ Food.FoodPrice.TETRABITS);
+
+                    }
+                    break;
+
+                }
+                case 3: {
+                    maxFoodToBuy = player.getMoney() / Food.FoodPrice.MEAT.foodPrice;
+                    if (maxFoodToBuy > 0) {
+                        foodToBuy = maxFoodToBuy(maxFoodToBuy);
+                        player.setMoney(player.getMoney() - (Food.FoodPrice.MEAT.foodPrice * foodToBuy));
+                        player.getOwnedFood()[2].setQuantityFood(player.getOwnedFood()[2].getQuantityFood() + foodToBuy);
+                        System.out.println("You have bought "+foodToBuy+" new "+ Food.FoodPrice.MEAT);
+                    }
+                    break;
+                }
+            }
+        } while (!(inputChoice == 4));    //TODO Fix the loop
+    }
+
+    private int maxFishToBuy(int maxFishToBuy) {
+        do {
+            System.out.println(ControlMethods.maxFishToBuy + maxFishToBuy);
             System.out.println(ControlMethods.enterQuantity);
             fishToBuy = controlMethods.convertInputToInt();
-        } while ((fishToBuy > maxFishTobuy) || (fishToBuy < 1));
+        } while ((fishToBuy > maxFishToBuy) || (fishToBuy < 1));
         return fishToBuy;
+    }
+
+    private int maxFoodToBuy(int maxFoodToBuy) {
+        do {
+            System.out.println(ControlMethods.maxFoodToBuy + maxFoodToBuy);
+            System.out.println(ControlMethods.enterQuantity);
+            foodToBuy = controlMethods.convertInputToInt();
+
+        } while ((foodToBuy > maxFoodToBuy) || foodToBuy < 1);
+        return foodToBuy;
     }
 
     public void sellAllFishEndGame() {
@@ -191,8 +239,8 @@ public class Store {
             }
         }
 
-        }
     }
+}
 
 
 
