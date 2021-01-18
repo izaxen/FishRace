@@ -17,13 +17,8 @@ public class Player {
 
     private ArrayList<Animal> ownedFishes = new ArrayList();
 
-    public Food[] getOwnedFood() {
-        return ownedFood;
-    }
 
-    public void setOwnedFood(Food[] ownedFood) {
-        this.ownedFood = ownedFood;
-    }
+
 
     private Food[] ownedFood = {
             new Flakes(),
@@ -34,6 +29,10 @@ public class Player {
     public Player(String name) {
         this.name = name;
 
+    }
+
+    public Food[] getOwnedFood() {
+        return ownedFood;
     }
 
     public int getMoney() {
@@ -93,24 +92,24 @@ public class Player {
 
     }
 
-    public void feedYourFish(Player player) {
+    public void feedYourFish() {
         int inputChoice;
 
         do {
-            menuSystem.feedFishMenu(player);
+            menuSystem.feedFishMenu(this);
             inputChoice = controlMethods.convertInputToInt();
             switch (inputChoice) {
                 case 1: {
-                    for (Animal feedFish : player.getOwnedFishes()) {
+                    for (Animal feedFish : this.getOwnedFishes()) {
 
                         if (feedFish.isFlakes()) {
                             if (feedFish.getHealth() > 99) {
                                 System.out.println(feedFish.getName() + " of the type " + feedFish.getClass().getSimpleName() + " already has full health no need for more food");
-                            } else if (player.getOwnedFood()[0].getQuantityFood() > 0) {
+                            } else if (this.getOwnedFood()[0].getQuantityFood() > 0) {
                                 System.out.println("Do you want to feed " + feedFish.getName() + " of the type " + feedFish.getClass().getSimpleName());
                                 System.out.println("If you don´t want to feed the fish type NO else just press enter");
                                 if (!controlMethods.inputString().equalsIgnoreCase("no")) {
-                                    player.getOwnedFood()[0].setQuantityFood(player.getOwnedFood()[0].getQuantityFood() - 1);
+                                    this.getOwnedFood()[0].setQuantityFood(this.getOwnedFood()[0].getQuantityFood() - 1);
                                     feedFish.setHealth(feedFish.getHealthBoostFlakes() + feedFish.getHealth());
                                     if (feedFish.getHealth() > 100){
                                         feedFish.setHealth(100);
@@ -124,15 +123,15 @@ public class Player {
                     break;
                 }
                 case 2: {
-                    for (Animal feedFish : player.getOwnedFishes()) {
+                    for (Animal feedFish : this.getOwnedFishes()) {
                         if (feedFish.isTetrabits()) {
                             if (feedFish.getHealth() > 99) {
                                 System.out.println(feedFish.getName() + " of the type " + feedFish.getClass().getSimpleName() + " already has full health no need for more food");
-                            } else if (player.getOwnedFood()[0].getQuantityFood() > 0) {
+                            } else if (this.getOwnedFood()[0].getQuantityFood() > 0) {
                                 System.out.println("Do you want to feed " + feedFish.getName() + " of the type " + feedFish.getClass().getSimpleName());
                                 System.out.println("If you don´t want to feed the fish type NO else just press enter");
                                 if (!controlMethods.inputString().equalsIgnoreCase("no")) {
-                                    player.getOwnedFood()[0].setQuantityFood(player.getOwnedFood()[0].getQuantityFood() - 1);
+                                    this.getOwnedFood()[0].setQuantityFood(this.getOwnedFood()[0].getQuantityFood() - 1);
                                     feedFish.setHealth(feedFish.getHealthBoostFlakes() + feedFish.getHealth());
                                     if (feedFish.getHealth() > 100){
                                         feedFish.setHealth(100);}
@@ -145,17 +144,17 @@ public class Player {
                     break;
                 }
                 case 3: {
-                    for (Animal feedFish : player.getOwnedFishes()) {
+                    for (Animal feedFish : this.getOwnedFishes()) {
                         if (feedFish.isMeat()) {
                             if (feedFish.getHealth() > 99) {
                                 System.out.println(feedFish.getName() + " of the type " + feedFish.getClass().getSimpleName() + " already has full health no need for more food");
                             }
 
-                            if (player.getOwnedFood()[0].getQuantityFood() > 0) {
+                            if (this.getOwnedFood()[0].getQuantityFood() > 0) {
                                 System.out.println("Do you want to feed " + feedFish.getName() + " of the type " + feedFish.getClass().getSimpleName());
                                 System.out.println("If you don´t want to feed the fish type NO else just press enter");
                                 if (!controlMethods.inputString().equalsIgnoreCase("no")) {
-                                    player.getOwnedFood()[0].setQuantityFood(player.getOwnedFood()[0].getQuantityFood() - 1);
+                                    this.getOwnedFood()[0].setQuantityFood(this.getOwnedFood()[0].getQuantityFood() - 1);
                                     feedFish.setHealth(feedFish.getHealthBoostFlakes() + feedFish.getHealth());
                                     if (feedFish.getHealth() > 100){
                                         feedFish.setHealth(100);}
@@ -169,5 +168,26 @@ public class Player {
                 }
             }
         } while ((inputChoice > 0) && (inputChoice < 4));
+    }
+    public void checkForPossibleBreedingCouples(){
+        System.out.println("Here comes a list of breedable males");
+        int idNumber = 0;
+
+        for (int i = 0; i < this.getOwnedFishes().size(); i++){
+            if (this.getOwnedFishes().get(i).getGender().equalsIgnoreCase("male")){
+                for (Animal checkBreedableMate: this.getOwnedFishes()){
+
+                    if(checkBreedableMate.getGender().equalsIgnoreCase("female")){
+                        if(checkBreedableMate.getClass() == this.ownedFishes.get(i).getClass()){
+                            System.out.println(this.getOwnedFishes().get(i).getName() + " of type " + this.getOwnedFishes().get(i).getClass().getSimpleName() + " have females to breed with");
+                            break;
+                        }
+                    }
+                }
+
+
+        }
+        }
+
     }
 }

@@ -2,7 +2,6 @@ package Game;
 
 import Animals.Animal;
 import java.util.ArrayList;
-import Food.*;
 
 public class Game {
     private int inputInt;
@@ -72,7 +71,7 @@ public class Game {
                 if (player.isPlayerActive()) {
 
                     menuSystem.mainMenu(player);
-                    chooseAction(player);
+                    chooseActionMainMenu(player);
                 }
                 else
                     System.out.println(player.getName() + " is out of the game\n" +
@@ -82,7 +81,7 @@ public class Game {
         store.sellAllFishEndGame();
     }
 
-    public void chooseAction(Player player) {
+    public void chooseActionMainMenu(Player player) {
 
         do {
             inputInt = controlMethods.convertInputToInt();
@@ -106,14 +105,13 @@ public class Game {
                 }
                 case 4: {
                     //Feed fish
-                    player.feedYourFish(player);
-
+                    player.feedYourFish();
 
                     break;
                 }
                 case 5: {
                     //breed fish
-
+                    player.checkForPossibleBreedingCouples();
                 }
 
                 default: {

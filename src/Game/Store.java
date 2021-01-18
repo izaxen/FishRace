@@ -97,14 +97,15 @@ public class Store {
                         break;
                     }
                     case 6: {
-                        mygame.chooseAction(player);
+                        mygame.chooseActionMainMenu(player);
                         break;
                     }
                     case 7: {
+                        return;
                     }
                 }
             }
-        } while (inputChoice < 1);
+        } while (inputChoice ==7);
     }
 
 
