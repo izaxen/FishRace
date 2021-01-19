@@ -69,7 +69,10 @@ public class MenuSystem {
             System.out.println("* [5] Buy " + Animal.Fishprice.HYPERANCISTRUS_ZEBRA + "  " + "\t".repeat(4) + Animal.Fishprice.HYPERANCISTRUS_ZEBRA.fishPrice + " kr\t\t\t*");
         else System.out.println("* [ ] " + Animal.Fishprice.HYPERANCISTRUS_ZEBRA + "\t".repeat(5) + "Out of stock\t*");
 
-        System.out.println("* [6] End turn" + "\t".repeat(12) + "*");
+        if (player.isPlayerRoundChoice())
+            System.out.println("* [6] End turn" + "\t".repeat(12) + "*");
+        else
+            System.out.println("* [6] Go back" + "\t".repeat(12) + "*");
 
 
     }
@@ -81,17 +84,21 @@ public class MenuSystem {
         if (availableMoney > Food.FoodPrice.FLAKES.foodPrice)
             System.out.println("* [1] Buy " + Food.FoodPrice.FLAKES + "\t".repeat(7) + Food.FoodPrice.FLAKES.foodPrice + " kr \t\t\t*");
         else
-            System.out.println("* [ ] "+ Food.FoodPrice.FLAKES + ControlMethods.errorOutOfStock);
+            System.out.println("* [ ] " + Food.FoodPrice.FLAKES + ControlMethods.errorOutOfStock);
         if (availableMoney > Food.FoodPrice.TETRABITS.foodPrice)
-            System.out.println("* [2] Buy " + Food.FoodPrice.TETRABITS + "\t".repeat(7)+ Food.FoodPrice.TETRABITS.foodPrice + " kr \t\t\t*");
+            System.out.println("* [2] Buy " + Food.FoodPrice.TETRABITS + "\t".repeat(7) + Food.FoodPrice.TETRABITS.foodPrice + " kr \t\t\t*");
         else
-            System.out.println("* [ ] "+ Food.FoodPrice.TETRABITS + ControlMethods.errorOutOfStock);
-        if(availableMoney > Food.FoodPrice.MEAT.foodPrice)
+            System.out.println("* [ ] " + Food.FoodPrice.TETRABITS + ControlMethods.errorOutOfStock);
+        if (availableMoney > Food.FoodPrice.MEAT.foodPrice)
             System.out.println("* [3] Buy " + Food.FoodPrice.MEAT + "\t".repeat(8) + Food.FoodPrice.MEAT.foodPrice + " kr \t\t\t*");
         else
             System.out.println("* [ ] " + Food.FoodPrice.MEAT + ControlMethods.errorOutOfStock);
 
-        System.out.println("* [4] Return");
+        if (player.isPlayerRoundChoice())
+
+            System.out.println("* [4] End turn" + "\t".repeat(12) + "*");
+
+        else System.out.println("* [4] Go back" + "\t".repeat(12) + "*");
 
 
     }
@@ -99,18 +106,26 @@ public class MenuSystem {
     public void sellFishMenu(Player player) {
         System.out.printf("%1$s%n* \t\t\t\tStayfishy sell fish menu\t\tRound: %4$d\t*%n" +
                 "* Playername: %2$s\t\t\t\t\t\t\tBank: %3$skr*%n%1$s%n", starRow, player.getName(), player.getMoney(), Game.gameRoundsLeft);
-        System.out.println(
-                "* [1] Show list of available fish\n" +
-                        "* [2] Choose fish to sell\n" +
-                        "* [3] End round");
+        System.out.println("* [1] Show list of available fish" + "\t".repeat(12) + "*");
+        System.out.println("* [2] Choose fish to sell" + "\t".repeat(12) + "*");
+
+        if (player.isPlayerRoundChoice())
+            System.out.println("* [3] End turn" + "\t".repeat(12) + "*");
+
+        else System.out.println("* [3] Go back" + "\t".repeat(12) + "*");
     }
-    public void feedFishMenu(Player player){
+
+    public void feedFishMenu(Player player) {
 
         System.out.printf("%1$s%n* \t\t\t\t\tStayfishy fish menu\t\t\tRound: %4$d\t*%n" +
                 "* Playername: %2$s\t\t\t\t\t\t\tBank: %3$skr*%n%1$s%n", starRow, player.getName(), player.getMoney(), Game.gameRoundsLeft);
-        System.out.println("* [1] Feed fish with "+ Food.FoodPrice.FLAKES + "\t".repeat(5) + "Available: "+ player.getOwnedFood()[0].getQuantityFood()+"\t*");
-        System.out.println("* [2] Feed fish with "+ Food.FoodPrice.TETRABITS+ "\t".repeat(4) + "Available: "+player.getOwnedFood()[1].getQuantityFood()+"\t*");
-        System.out.println("* [3] Feed fish with "+Food.FoodPrice.MEAT + "\t".repeat(5) + "Available: "+ player.getOwnedFood()[2].getQuantityFood()+"\t*");
+        System.out.println("* [1] Feed fish with " + Food.FoodPrice.FLAKES + "\t".repeat(5) + "Available: " + player.getOwnedFood()[0].getQuantityFood() + "\t*");
+        System.out.println("* [2] Feed fish with " + Food.FoodPrice.TETRABITS + "\t".repeat(4) + "Available: " + player.getOwnedFood()[1].getQuantityFood() + "\t*");
+        System.out.println("* [3] Feed fish with " + Food.FoodPrice.MEAT + "\t".repeat(5) + "Available: " + player.getOwnedFood()[2].getQuantityFood() + "\t*");
+        if (player.isPlayerRoundChoice())
+            System.out.println("* [4] End turn" + "\t".repeat(12) + "*");
+        else
+            System.out.println("* [4] Go back" + "\t".repeat(12) + "*");
 
 
     }

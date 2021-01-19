@@ -70,7 +70,6 @@ public class Game {
 
                 if (player.isPlayerActive()) {
 
-                    menuSystem.mainMenu(player);
                     chooseActionMainMenu(player);
                 }
                 else
@@ -84,6 +83,7 @@ public class Game {
     public void chooseActionMainMenu(Player player) {
 
         do {
+            menuSystem.mainMenu(player);
             inputInt = controlMethods.convertInputToInt();
 
             switch (inputInt) {

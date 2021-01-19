@@ -37,6 +37,15 @@ public abstract class Animal {
     private int healthBoostFlakes;
     private int HealthBoostTetrabits;
     private int HealthBoostMeat;
+    private int offspring;
+
+    public int getOffspring() {
+        return offspring;
+    }
+
+    public void setOffspring(int offspring) {
+        this.offspring = offspring;
+    }
 
     public int getHealthBoostFlakes() {
         return healthBoostFlakes;
@@ -148,17 +157,11 @@ public abstract class Animal {
     }
 
 
-    private void breedAnimals() {
-
-    }
-
     public void setMaxAgeFish(int maxAgeFish) {
         this.maxAgeFish = maxAgeFish;
     }
 
     public void decreaseHealthAndAge() {
-        Random random = new Random();
-        //this.health = this.health - (random.ints(10, 31).findFirst().getAsInt());
         this.health -=  (int) (Math.random() * (20))+10;
         this.ageFish = this.ageFish + 1;
         if ((this.health > 0) && (this.ageFish <= this.maxAgeFish)) {

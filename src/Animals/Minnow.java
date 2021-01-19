@@ -7,6 +7,7 @@ public class Minnow extends Animal {
     setFlakes(true);
     setMaxAgeFish(5);
     setHealthBoostFlakes(15);
+    setOffspring((int) (Math.random() * (10))+5);
 
 
     }

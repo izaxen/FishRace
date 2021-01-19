@@ -10,14 +10,12 @@ public class Player {
     private String name;
     private int money = 600;
     private boolean playerActive = true;
-    private boolean playerRoundChoice = true;
+    private boolean playerRoundChoice = false;
     MenuSystem menuSystem = new MenuSystem();
     ControlMethods controlMethods = new ControlMethods();
 
 
     private ArrayList<Animal> ownedFishes = new ArrayList();
-
-
 
 
     private Food[] ownedFood = {
@@ -111,7 +109,8 @@ public class Player {
                                 if (!controlMethods.inputString().equalsIgnoreCase("no")) {
                                     this.getOwnedFood()[0].setQuantityFood(this.getOwnedFood()[0].getQuantityFood() - 1);
                                     feedFish.setHealth(feedFish.getHealthBoostFlakes() + feedFish.getHealth());
-                                    if (feedFish.getHealth() > 100){
+                                    setPlayerRoundChoice(true);
+                                    if (feedFish.getHealth() > 100) {
                                         feedFish.setHealth(100);
                                     }
                                 }
@@ -133,8 +132,10 @@ public class Player {
                                 if (!controlMethods.inputString().equalsIgnoreCase("no")) {
                                     this.getOwnedFood()[0].setQuantityFood(this.getOwnedFood()[0].getQuantityFood() - 1);
                                     feedFish.setHealth(feedFish.getHealthBoostFlakes() + feedFish.getHealth());
-                                    if (feedFish.getHealth() > 100){
-                                        feedFish.setHealth(100);}
+                                    setPlayerRoundChoice(true);
+                                    if (feedFish.getHealth() > 100) {
+                                        feedFish.setHealth(100);
+                                    }
                                 }
                             } else {
                                 System.out.println(Food.FoodPrice.TETRABITS + " is" + ControlMethods.errorOutOfStock + ". And " + feedFish.getName() + " starved");
@@ -156,8 +157,10 @@ public class Player {
                                 if (!controlMethods.inputString().equalsIgnoreCase("no")) {
                                     this.getOwnedFood()[0].setQuantityFood(this.getOwnedFood()[0].getQuantityFood() - 1);
                                     feedFish.setHealth(feedFish.getHealthBoostFlakes() + feedFish.getHealth());
-                                    if (feedFish.getHealth() > 100){
-                                        feedFish.setHealth(100);}
+                                    setPlayerRoundChoice(true);
+                                    if (feedFish.getHealth() > 100) {
+                                        feedFish.setHealth(100);
+                                    }
                                 }
                             } else {
                                 System.out.println(Food.FoodPrice.MEAT + " is" + ControlMethods.errorOutOfStock + ". And " + feedFish.getName() + " starved");
@@ -169,25 +172,40 @@ public class Player {
             }
         } while ((inputChoice > 0) && (inputChoice < 4));
     }
-    public void checkForPossibleBreedingCouples(){
-        System.out.println("Here comes a list of breedable males");
-        int idNumber = 0;
 
-        for (int i = 0; i < this.getOwnedFishes().size(); i++){
-            if (this.getOwnedFishes().get(i).getGender().equalsIgnoreCase("male")){
-                for (Animal checkBreedableMate: this.getOwnedFishes()){
+    public void checkForPossibleBreedingCouples() {
+        System.out.println("Here comes a list of breedable fish");
 
-                    if(checkBreedableMate.getGender().equalsIgnoreCase("female")){
-                        if(checkBreedableMate.getClass() == this.ownedFishes.get(i).getClass()){
-                            System.out.println(this.getOwnedFishes().get(i).getName() + " of type " + this.getOwnedFishes().get(i).getClass().getSimpleName() + " have females to breed with");
-                            break;
+        for (int i = 0; i < this.getOwnedFishes().size(); i++) {
+            if (this.getOwnedFishes().get(i).getGender().equalsIgnoreCase("male")) {
+                int idNumber = 0;
+                for (Animal checkBreedableMate : this.getOwnedFishes()) {
+
+                    if (checkBreedableMate.getGender().equalsIgnoreCase("female")) {
+                        if (checkBreedableMate.getClass() == this.ownedFishes.get(i).getClass()) {
+                            System.out.println(this.getOwnedFishes().get(i).getClass().getSimpleName() + " - Male: "+ "["+i+"]" +  this.getOwnedFishes().get(i).getName()   + "\t\tFemale: " + "["+idNumber+"]" + checkBreedableMate.getName());
                         }
                     }
+                                        idNumber++;
                 }
+                System.out.println("\n");
+            }
+        }
+        System.out.println("Choose which couple you want to breed from");
+        System.out.println("Enter male ID");
+        int maleId = controlMethods.convertInputToInt();
+        System.out.println("Enter female ID");
+        int femaleId = controlMethods.convertInputToInt();
+        if((this.getOwnedFishes().get(maleId).getClass().getSimpleName().equalsIgnoreCase(this.getOwnedFishes().get(femaleId).getClass().getSimpleName())) && (this.getOwnedFishes().get(maleId).getGender() != this.getOwnedFishes().get(femaleId).getGender()))
+        {
+              int breed = (int) (Math.random() * (20))+1;
+              if (breed >10)
+              {
+                  System.out.println(breed);}
+        }
 
 
-        }
-        }
+
 
     }
 }

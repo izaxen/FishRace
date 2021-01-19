@@ -19,17 +19,17 @@ public class Store {
     }
 
     public void buyFish(Player player) {
-        menuSystem.fishMenu(player.getMoney(), player);
-        do {
 
+        do {
+            menuSystem.fishMenu(player.getMoney(), player);
             inputChoice = controlMethods.convertInputToInt();
 
-            if ((inputChoice > 0) && (inputChoice < 6)) {
+            if ((inputChoice > 0) && (inputChoice < 7)) {
                 switch (inputChoice) {
                     case 1: {
-                        maxFishTobuy = player.getMoney() / Animal.Fishprice.MINNOW.fishPrice;
-
+                                     maxFishTobuy = player.getMoney() / Animal.Fishprice.MINNOW.fishPrice;
                         if (maxFishTobuy > 0) {
+                            player.setPlayerRoundChoice(true);
                             fishToBuy = maxFishToBuy(maxFishTobuy);
                             for (int i = 0; i < (fishToBuy); i++) {
                                 player.setMoney(player.getMoney() - Animal.Fishprice.MINNOW.fishPrice);
@@ -42,8 +42,10 @@ public class Store {
                         break;
                     }
                     case 2: {
+
                         maxFishTobuy = player.getMoney() / Animal.Fishprice.CORYDORAS_STERBAI.fishPrice;
                         if (maxFishTobuy > 0) {
+                            player.setPlayerRoundChoice(true);
                             fishToBuy = maxFishToBuy(maxFishTobuy);
                             for (int i = 0; i < fishToBuy; i++) {
                                 player.setMoney(player.getMoney() - Animal.Fishprice.CORYDORAS_STERBAI.fishPrice);
@@ -59,6 +61,7 @@ public class Store {
                         maxFishTobuy = player.getMoney() / Animal.Fishprice.ANGELFISH.fishPrice;
 
                         if (maxFishTobuy > 0) {
+                            player.setPlayerRoundChoice(true);
                             fishToBuy = maxFishToBuy(maxFishTobuy);
                             for (int i = 0; i < (fishToBuy); i++) {
                                 player.setMoney(player.getMoney() - Animal.Fishprice.ANGELFISH.fishPrice);
@@ -72,6 +75,7 @@ public class Store {
                     case 4: {
                         maxFishTobuy = player.getMoney() / Animal.Fishprice.PIRANHA.fishPrice;
                         if (maxFishTobuy > 0) {
+                            player.setPlayerRoundChoice(true);
                             fishToBuy = maxFishToBuy(maxFishTobuy);
                             for (int i = 0; i < (fishToBuy); i++) {
                                 player.setMoney(player.getMoney() - Animal.Fishprice.PIRANHA.fishPrice);
@@ -85,6 +89,7 @@ public class Store {
                     case 5: {
                         maxFishTobuy = player.getMoney() / Animal.Fishprice.HYPERANCISTRUS_ZEBRA.fishPrice;
                         if (maxFishTobuy > 0) {
+                            player.setPlayerRoundChoice(true);
                             fishToBuy = maxFishToBuy(maxFishTobuy);
                             for (int i = 0; i < (fishToBuy); i++) {
                                 player.setMoney(player.getMoney() - Animal.Fishprice.HYPERANCISTRUS_ZEBRA.fishPrice);
@@ -97,15 +102,17 @@ public class Store {
                         break;
                     }
                     case 6: {
-                        mygame.chooseActionMainMenu(player);
+                        if (player.isPlayerRoundChoice())
                         break;
+                        else
+                            mygame.chooseActionMainMenu(player);
                     }
-                    case 7: {
-                        return;
-                    }
+                    default:
+                        System.out.println(ControlMethods.errorNumber);
+
                 }
             }
-        } while (inputChoice ==7);
+        } while (inputChoice != 6);
     }
 
 
@@ -146,6 +153,7 @@ public class Store {
                     System.out.println("Choose which fish you want to sell by their ID number\n" +
                             "If you want to sell more then one fish just enter their ID after a blankspace");
                     String[] numberAsString = controlMethods.inputString().split(" ");
+                    player.setPlayerRoundChoice(true);
                     for (int i = player.getOwnedFishes().size() - 1; i >= 0; i--) {
 
                         for (String testPrint : numberAsString) {
@@ -164,6 +172,12 @@ public class Store {
                     System.out.println("Player money after sell " + player.getMoney());
                     break;
                 }
+                case 3:
+                    if(player.isPlayerRoundChoice())
+                        break;
+                    else
+                        mygame.chooseActionMainMenu(player);
+
                 default:
                     System.out.println(ControlMethods.errorNumber);
             }
@@ -180,6 +194,7 @@ public class Store {
                 case 1: {
                     maxFoodToBuy = player.getMoney() / Food.FoodPrice.FLAKES.foodPrice;
                     if (maxFoodToBuy > 0) {
+                        player.setPlayerRoundChoice(true);
                         foodToBuy = maxFoodToBuy(maxFoodToBuy);
                         player.setMoney(player.getMoney() - (Food.FoodPrice.FLAKES.foodPrice * foodToBuy));
                         player.getOwnedFood()[0].setQuantityFood(player.getOwnedFood()[0].getQuantityFood() + foodToBuy);
@@ -190,6 +205,7 @@ public class Store {
                 case 2: {
                     maxFoodToBuy = player.getMoney() / Food.FoodPrice.TETRABITS.foodPrice;
                     if (maxFoodToBuy > 0) {
+                        player.setPlayerRoundChoice(true);
                         foodToBuy = maxFoodToBuy(maxFoodToBuy);
                         player.setMoney(player.getMoney() - (Food.FoodPrice.TETRABITS.foodPrice * foodToBuy));
                         player.getOwnedFood()[1].setQuantityFood(player.getOwnedFood()[1].getQuantityFood() + foodToBuy);
@@ -202,13 +218,18 @@ public class Store {
                 case 3: {
                     maxFoodToBuy = player.getMoney() / Food.FoodPrice.MEAT.foodPrice;
                     if (maxFoodToBuy > 0) {
+                        player.setPlayerRoundChoice(true);
                         foodToBuy = maxFoodToBuy(maxFoodToBuy);
                         player.setMoney(player.getMoney() - (Food.FoodPrice.MEAT.foodPrice * foodToBuy));
                         player.getOwnedFood()[2].setQuantityFood(player.getOwnedFood()[2].getQuantityFood() + foodToBuy);
                         System.out.println("You have bought "+foodToBuy+" new "+ Food.FoodPrice.MEAT);
                     }
                     break;
-                }
+                } case 4:
+                    if(player.isPlayerRoundChoice())
+                        break;
+                    else
+                        mygame.chooseActionMainMenu(player);
             }
         } while (!(inputChoice == 4));    //TODO Fix the loop
     }
