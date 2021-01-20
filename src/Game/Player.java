@@ -97,7 +97,8 @@ public class Player {
 
     }
 
-    public void feedYourFish() {
+    public void feedYourFish() {// SKICKA över till ny klass
+
         int inputChoice;
 
         do {
@@ -180,43 +181,5 @@ public class Player {
         } while ((inputChoice > 0) && (inputChoice < 4));
     }
 
-    public void checkForPossibleBreedingCouples() {
-        System.out.println("Here comes a list of breedable fish");
 
-        for (int i = 0; i < this.getOwnedFishes().size(); i++) {
-            if (this.getOwnedFishes().get(i).getGender().equalsIgnoreCase("male")) {
-                int idNumber = 0;
-                for (Animal checkBreedableMate : this.getOwnedFishes()) {
-
-                    if (checkBreedableMate.getGender().equalsIgnoreCase("female")) {
-                        if (checkBreedableMate.getClass() == this.ownedFishes.get(i).getClass()) {
-                            System.out.println(this.getOwnedFishes().get(i).getClass().getSimpleName() + " - Male: "+ "["+i+"]" +  this.getOwnedFishes().get(i).getName()   + "\t\tFemale: " + "["+idNumber+"]" + checkBreedableMate.getName());
-                        }
-                    }
-                                        idNumber++;
-                }
-                System.out.println("\n");
-            }
-        }
-        System.out.println("Choose which couple you want to breed from");
-        System.out.println("Enter male ID");
-        int maleId = ControlMethods.convertInputToInt();
-        System.out.println("Enter female ID");
-        int femaleId = ControlMethods.convertInputToInt();
-        if((this.getOwnedFishes().get(maleId).getClass().getSimpleName().equalsIgnoreCase(this.getOwnedFishes().get(femaleId).getClass().getSimpleName())) && (this.getOwnedFishes().get(maleId).getGender() != this.getOwnedFishes().get(femaleId).getGender()))
-        {
-              int breed = (int) (Math.random() * (20))+1;
-              if (breed >10)
-              {
-                  System.out.println("The breeding went successfull, you now have new fish");
-                  //Skapa For loop med Case
-                  myGame.store.addNewFishBreeded(this, new Minnow());
-              }
-              else System.out.println("Sorry the breeding didn´t work");
-        }
-
-
-
-
-    }
 }

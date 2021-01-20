@@ -125,16 +125,7 @@ public class Store {
 
 
     }
-    public void addNewFishBreeded(Player player, Animal toAdd) {
-        System.out.println(ControlMethods.enterName);//TODO Add random name
-        toAdd.setName(ControlMethods.inputString());
 
-        toAdd.setGender("breed");
-        player.getOwnedFishes().add(toAdd);
-        System.out.println(toAdd.getName() + " of the type "+ toAdd.getClass().getSimpleName() +" has been added to your owned fish.\n");
-
-
-    }
 
     public void sellFishChoice(Player player) {
 
@@ -264,7 +255,8 @@ public class Store {
 
     public void sellAllFishEndGame() {
         for (Player player : mygame.getContestants()) {
-            for (int i = player.getOwnedFishes().size(); i >= 0; i--) {
+            if(player.getOwnedFishes().size() != 0)
+            for (int i = player.getOwnedFishes().size()-1; i >= 0; i--) {
                 player.setMoney(player.getMoney() + player.getOwnedFishes().get(i).calculateValue());
                 player.getOwnedFishes().remove(i);
 

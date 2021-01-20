@@ -8,5 +8,6 @@ public class Corydoras_Sterbai extends Animal {
         setMaxAgeFish(20);
         setHealthBoostTetrabits(15);
         setOffspring((int) (Math.random() * (20))+5);
+        setBreedChance(19);
     }
 }

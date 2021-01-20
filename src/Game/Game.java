@@ -2,6 +2,7 @@ package Game;
 
 import Animals.Animal;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class Game {
     private int inputInt;
@@ -12,11 +13,9 @@ public class Game {
 
     Store store = new Store(this);
     MenuSystem menuSystem = new MenuSystem(this);
+    Breeding breeding = new Breeding(this);
 
 
-    public ArrayList<Player> getContestants() {
-        return contestants;
-    }
     public Game() {
         setupGame();
     }
@@ -31,7 +30,7 @@ public class Game {
             inputInt = ControlMethods.convertInputToInt();
             if (inputInt > 0 && inputInt < 5) {
                 for (int i = 0; i < inputInt; i++) {
-                    System.out.printf("Enter player %d name:%n",i+1);
+                    System.out.printf("Enter player %d name:%n", i + 1);
                     Player player = new Player(ControlMethods.inputString());
                     contestants.add(player);
                     player.setMyGame(this);
@@ -47,7 +46,7 @@ public class Game {
         do {
             inputInt = ControlMethods.convertInputToInt();
             if (inputInt > 4 && inputInt < 31)
-                gameRounds = inputInt;
+                gameRounds = 2; //TODO inputInt;
 
             else
                 System.out.println(ControlMethods.errorNumber);
@@ -61,7 +60,7 @@ public class Game {
             gameRoundsLeft = gameRoundsLeft + 1;
             for (Player player : contestants) {
 
-                if (player.isPlayerActive()) {
+                if (player.isPlayerActive()) {//TODO Put in roundactive:False
                     for (Animal fish : player.getOwnedFishes()) {
                         fish.decreaseHealthAndAge();
                     }
@@ -71,13 +70,13 @@ public class Game {
                 if (player.isPlayerActive()) {
 
                     chooseActionMainMenu(player);
-                }
-                else
+                } else
                     System.out.println(player.getName() + " is out of the game\n" +
                             "Next player");
             }
         }
         store.sellAllFishEndGame();
+        endGameScoreList();
     }
 
     public void chooseActionMainMenu(Player player) {
@@ -111,7 +110,7 @@ public class Game {
                 }
                 case 5: {
                     //breed fish
-                    player.checkForPossibleBreedingCouples();
+                    breeding.checkForPossibleBreedingCouples(player);
                 }
 
                 default: {
@@ -121,8 +120,30 @@ public class Game {
 
         } while ((inputInt < 1) || (inputInt > 6));
     }
-    public void endGameScoreList(){//TODO Sort end game
 
+    public void endGameScoreList() {
+        contestants.sort(Comparator.comparing(Player::getMoney).reversed());
+        System.out.println("Result of the game");
+        for (int i = 0; i < contestants.size(); i++) {
+            if (i != 0) {
+                if (i > 2) {
+                    if ((contestants.get(i).getMoney() == contestants.get(i - 3).getMoney()) && (i > 2)) {
+                        System.out.println((i - 2) + " place: " + contestants.get(i).getName() + " with " + contestants.get(i).getMoney());
+                    }
+                } else if (i > 1) {
+                    if ((contestants.get(i).getMoney() == contestants.get(i - 2).getMoney())) {
+                        System.out.println((i - 1) + " place: " + contestants.get(i).getName() + " with " + contestants.get(i).getMoney());
+                    }
+                }
+                else if (contestants.get(i).getMoney() == contestants.get(i - 1).getMoney()) {
+                    System.out.println((i) + " place: " + contestants.get(i).getName() + " with " + contestants.get(i).getMoney());
+                }
+            } else
+                System.out.println((i + 1) + " place: " + contestants.get(i).getName() + " with " + contestants.get(i).getMoney());
+        }
     }
 
+    public ArrayList<Player> getContestants() {
+        return contestants;
+    }
 }

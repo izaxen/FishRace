@@ -15,20 +15,30 @@ public abstract class Animal {
         }
     }
 
+    private String gender;
     private String name;
     private int health = 100;
-
-
-    private String gender;
     private int price;
-    private boolean flakes = false;
-    private boolean tetrabits = false;
-    private boolean meat = false;
-    private boolean breeded = false;
+    private int maxAgeFish;
+    private int ageFish;
     private int healthBoostFlakes;
     private int HealthBoostTetrabits;
     private int HealthBoostMeat;
     private int offspring;
+    private int breedChance;
+    private boolean flakes = false;
+    private boolean tetrabits = false;
+    private boolean meat = false;
+    private boolean breeded = false;
+    private boolean doneBreeding = false;
+
+    public boolean isDoneBreeding() {
+        return doneBreeding;
+    }
+
+    public void setDoneBreeding(boolean doneBreeding) {
+        this.doneBreeding = doneBreeding;
+    }
 
     public int getOffspring() {
         return offspring;
@@ -63,7 +73,6 @@ public abstract class Animal {
     }
 
 
-
     public int getAgeFish() {
         return ageFish;
     }
@@ -76,8 +85,6 @@ public abstract class Animal {
         return maxAgeFish;
     }
 
-    private int maxAgeFish;
-    private int ageFish;
 
     public boolean isFlakes() {
         return flakes;
@@ -156,13 +163,20 @@ public abstract class Animal {
         this.gender = gender;
     }
 
-
     public void setMaxAgeFish(int maxAgeFish) {
         this.maxAgeFish = maxAgeFish;
     }
 
+    public int getBreedChance() {
+        return breedChance;
+    }
+
+    public void setBreedChance(int breedChance) {
+        this.breedChance = breedChance;
+    }
+
     public void decreaseHealthAndAge() {
-        this.health -=  (int) (Math.random() * (20))+10;
+        this.health -= (int) (Math.random() * (20)) + 10;
         this.ageFish = this.ageFish + 1;
         if ((this.health > 0) && (this.ageFish <= this.maxAgeFish)) {
             System.out.println(this.health + " in health left for " + this.getName() + ". Of the type " + this.getClass().getSimpleName() + "" +
@@ -170,29 +184,28 @@ public abstract class Animal {
         }
     }
 
-
     public int calculateValue() {
         int calculatedValue = 0;
         if (this instanceof Minnow) {
             if (this.ageFish == 1)
-                calculatedValue = (int) (((this.getHealth() * this.getPrice()) / 100) * 1.2);
+                calculatedValue = (int) (((this.getHealth() * this.getPrice()) / 100) * 0.95);
             else if (this.ageFish == 2)
-                calculatedValue = (int) (((this.getHealth() * this.getPrice()) / 100) * 0.8);
+                calculatedValue = (int) (((this.getHealth() * this.getPrice()) / 100) * 0.9);
             else if (this.ageFish >= 3)
-                calculatedValue = (int) (((this.getHealth() * this.getPrice()) / 100) * 0.6);
+                calculatedValue = (int) (((this.getHealth() * this.getPrice()) / 100) * 0.8);
 
             if (calculatedValue < 6)
                 calculatedValue = 5;
             if (breeded = true)
-                calculatedValue = (int) (calculatedValue * 1.1);
+                calculatedValue = (int) (calculatedValue * 1.2);
 
         }
         if (this instanceof Corydoras_Sterbai) {
             if (this.ageFish < 3)
-                calculatedValue = (int) (((this.getHealth() * this.getPrice()) / 100) * 1.2);
+                calculatedValue = (int) (((this.getHealth() * this.getPrice()) / 100) * 0.95);
             else if (this.ageFish < 5)
                 calculatedValue = (int) (((this.getHealth() * this.getPrice()) / 100) * 0.8);
-            else if (this.ageFish >= 5)
+            else
                 calculatedValue = (int) (((this.getHealth() * this.getPrice()) / 100) * 0.6);
 
             if (calculatedValue < 16)
@@ -203,11 +216,11 @@ public abstract class Animal {
         }
         if (this instanceof Angelfish) {
             if (this.ageFish < 3)
-                calculatedValue = (int) (((this.getHealth() * this.getPrice()) / 100) * 1.2);
+                calculatedValue = (int) (((this.getHealth() * this.getPrice()) / 100) * 0.90);
             else if (this.ageFish < 5)
-                calculatedValue = (int) (((this.getHealth() * this.getPrice()) / 100) * 0.8);
-            else if (this.ageFish >= 5)
-                calculatedValue = (int) (((this.getHealth() * this.getPrice()) / 100) * 0.6);
+                calculatedValue = (int) (((this.getHealth() * this.getPrice()) / 100) * 0.7);
+            else
+                calculatedValue = (int) (((this.getHealth() * this.getPrice()) / 100) * 0.5);
 
             if (calculatedValue < 31)
                 calculatedValue = 30;
@@ -217,11 +230,11 @@ public abstract class Animal {
         }
         if (this instanceof Piranha) {
             if (this.ageFish < 3)
-                calculatedValue = (int) (((this.getHealth() * this.getPrice()) / 100) * 1.0);
-            else if (this.ageFish < 10)
                 calculatedValue = (int) (((this.getHealth() * this.getPrice()) / 100) * 0.9);
-            else if (this.ageFish >= 10)
-                calculatedValue = (int) (((this.getHealth() * this.getPrice()) / 100) * 0.6);
+            else if (this.ageFish < 10)
+                calculatedValue = (int) (((this.getHealth() * this.getPrice()) / 100) * 0.7);
+            else
+                calculatedValue = (int) (((this.getHealth() * this.getPrice()) / 100) * 0.3);
 
             if (calculatedValue < 51)
                 calculatedValue = 50;
@@ -231,20 +244,19 @@ public abstract class Animal {
         }
         if (this instanceof Hyperancistrus_Zebra) {
             if (this.ageFish < 3)
-                calculatedValue = (int) (((this.getHealth() * this.getPrice()) / 100) * 1.2);
-            else if (this.ageFish < 5)
-                calculatedValue = (int) (((this.getHealth() * this.getPrice()) / 100) * 0.9);
-            else if (this.ageFish >= 5)
+                calculatedValue = (int) (((this.getHealth() * this.getPrice()) / 100) * 1.0);
+            else
                 calculatedValue = (int) (((this.getHealth() * this.getPrice()) / 100) * 0.8);
 
             if (calculatedValue < 51)
                 calculatedValue = 50;
             if (breeded = true)
-                calculatedValue = (int) (calculatedValue * 2);
+                calculatedValue = (calculatedValue * 2);
 
         }
         return calculatedValue;
     }
+
 }
 
 

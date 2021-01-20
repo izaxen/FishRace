@@ -54,7 +54,7 @@ public class MenuSystem {
         if (availableMoney >= Animal.Fishprice.MINNOW.fishPrice)
             System.out.println("* [1] Buy " + Animal.Fishprice.MINNOW + "\t".repeat(7) + Animal.Fishprice.MINNOW.fishPrice + " kr\t\t\t*");
         else
-            System.out.println("* [ ] " + Animal.Fishprice.MINNOW + "\t".repeat(9) + "Out of stock\t*");
+            System.out.println("* [ ] " + Animal.Fishprice.MINNOW + "\t".repeat(8) + "Out of stock\t*");
 
         if (availableMoney >= Animal.Fishprice.CORYDORAS_STERBAI.fishPrice)
             System.out.println("* [2] Buy " + Animal.Fishprice.CORYDORAS_STERBAI + "\t".repeat(5) + Animal.Fishprice.CORYDORAS_STERBAI.fishPrice + " kr\t\t\t*");
@@ -112,8 +112,8 @@ public class MenuSystem {
     public void sellFishMenu(Player player) {
         System.out.printf("%1$s%n* \t\t\t\tStayfishy sell fish menu\t\tRound: %4$d\t*%n" +
                 "* Playername: %2$s\t\t\t\t\t\t\tBank: %3$skr*%n%1$s%n", starRow, player.getName(), player.getMoney(), Game.gameRoundsLeft);
-        System.out.println("* [1] Show list of available fish" + "\t".repeat(12) + "*");
-        System.out.println("* [2] Choose fish to sell" + "\t".repeat(12) + "*");
+        System.out.println("* [1] Show list of available fish" + "\t".repeat(7) + "*");
+        System.out.println("* [2] Choose fish to sell" + "\t".repeat(11) + "*");
 
         if (player.isPlayerRoundChoice())
             System.out.println("* [3] End turn" + "\t".repeat(12) + "*");
@@ -132,7 +132,5 @@ public class MenuSystem {
             System.out.println("* [4] End turn" + "\t".repeat(12) + "*");
         else
             System.out.println("* [4] Go back" + "\t".repeat(12) + "*");
-
-
     }
 }

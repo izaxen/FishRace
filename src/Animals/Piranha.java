@@ -8,5 +8,6 @@ public class Piranha extends Animal {
         setMaxAgeFish(30);
         setHealthBoostMeat(30);
         setOffspring((int) (Math.random() * (20))+10);
+        setBreedChance(16);
     }
 }
