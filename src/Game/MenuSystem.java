@@ -5,6 +5,12 @@ import Food.*;
 
 public class MenuSystem {
 
+    private Game mygame;        //Creates a constructor for the class to reach
+
+    public MenuSystem(Game mygame)
+    {this.mygame = mygame;}
+
+
 
     public static String starRow = "*".repeat(61);
 

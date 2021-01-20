@@ -1,7 +1,7 @@
 package Game;
 import java.util.*;
 public class ControlMethods {
-    Scanner input = new Scanner(System.in);
+
 
     public static String enterName = "Please enter a name:";
     public static String enterQuantity = "Please enter the amount:";
@@ -12,7 +12,8 @@ public class ControlMethods {
 
 
     //Method that convert a input string to an int. And returns the value as int.
-    public int convertInputToInt() {
+    public static int convertInputToInt() {
+        Scanner input = new Scanner(System.in);
 
         while (true) {
             try {
@@ -23,7 +24,8 @@ public class ControlMethods {
         }
     }
 
-    public String inputString() {
+    public static String inputString() {
+        Scanner input = new Scanner(System.in);
         return input.nextLine();
     }
 }

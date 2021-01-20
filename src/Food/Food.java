@@ -1,7 +1,5 @@
 package Food;
 
-import Game.Player;
-
 public abstract class Food {
     public enum FoodPrice {
         FLAKES(2),
@@ -15,7 +13,6 @@ public abstract class Food {
         }
     }
 
-
     private int price;
     private int quantityFood = 0;
 
@@ -27,8 +24,6 @@ public abstract class Food {
     public void setQuantityFood(int quantityFood) {
         this.quantityFood = quantityFood;
     }
-
-
 
     public void setPrice(int price) {
         this.price = price;

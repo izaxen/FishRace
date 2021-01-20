@@ -1,6 +1,7 @@
 package Game;
 
 import Animals.Animal;
+import Animals.Minnow;
 import Food.*;
 import java.util.ArrayList;
 
@@ -11,8 +12,10 @@ public class Player {
     private int money = 600;
     private boolean playerActive = true;
     private boolean playerRoundChoice = false;
-    MenuSystem menuSystem = new MenuSystem();
-    ControlMethods controlMethods = new ControlMethods();
+
+
+
+    private Game myGame;
 
 
     private ArrayList<Animal> ownedFishes = new ArrayList();
@@ -27,6 +30,10 @@ public class Player {
     public Player(String name) {
         this.name = name;
 
+    }
+
+    public void setMyGame(Game myGame) {
+        this.myGame = myGame ;
     }
 
     public Food[] getOwnedFood() {
@@ -94,8 +101,8 @@ public class Player {
         int inputChoice;
 
         do {
-            menuSystem.feedFishMenu(this);
-            inputChoice = controlMethods.convertInputToInt();
+            myGame.menuSystem.feedFishMenu(this);
+            inputChoice = ControlMethods.convertInputToInt();
             switch (inputChoice) {
                 case 1: {
                     for (Animal feedFish : this.getOwnedFishes()) {
@@ -106,7 +113,7 @@ public class Player {
                             } else if (this.getOwnedFood()[0].getQuantityFood() > 0) {
                                 System.out.println("Do you want to feed " + feedFish.getName() + " of the type " + feedFish.getClass().getSimpleName());
                                 System.out.println("If you don´t want to feed the fish type NO else just press enter");
-                                if (!controlMethods.inputString().equalsIgnoreCase("no")) {
+                                if (!ControlMethods.inputString().equalsIgnoreCase("no")) {
                                     this.getOwnedFood()[0].setQuantityFood(this.getOwnedFood()[0].getQuantityFood() - 1);
                                     feedFish.setHealth(feedFish.getHealthBoostFlakes() + feedFish.getHealth());
                                     setPlayerRoundChoice(true);
@@ -129,7 +136,7 @@ public class Player {
                             } else if (this.getOwnedFood()[0].getQuantityFood() > 0) {
                                 System.out.println("Do you want to feed " + feedFish.getName() + " of the type " + feedFish.getClass().getSimpleName());
                                 System.out.println("If you don´t want to feed the fish type NO else just press enter");
-                                if (!controlMethods.inputString().equalsIgnoreCase("no")) {
+                                if (!ControlMethods.inputString().equalsIgnoreCase("no")) {
                                     this.getOwnedFood()[0].setQuantityFood(this.getOwnedFood()[0].getQuantityFood() - 1);
                                     feedFish.setHealth(feedFish.getHealthBoostFlakes() + feedFish.getHealth());
                                     setPlayerRoundChoice(true);
@@ -154,7 +161,7 @@ public class Player {
                             if (this.getOwnedFood()[0].getQuantityFood() > 0) {
                                 System.out.println("Do you want to feed " + feedFish.getName() + " of the type " + feedFish.getClass().getSimpleName());
                                 System.out.println("If you don´t want to feed the fish type NO else just press enter");
-                                if (!controlMethods.inputString().equalsIgnoreCase("no")) {
+                                if (!ControlMethods.inputString().equalsIgnoreCase("no")) {
                                     this.getOwnedFood()[0].setQuantityFood(this.getOwnedFood()[0].getQuantityFood() - 1);
                                     feedFish.setHealth(feedFish.getHealthBoostFlakes() + feedFish.getHealth());
                                     setPlayerRoundChoice(true);
@@ -193,15 +200,19 @@ public class Player {
         }
         System.out.println("Choose which couple you want to breed from");
         System.out.println("Enter male ID");
-        int maleId = controlMethods.convertInputToInt();
+        int maleId = ControlMethods.convertInputToInt();
         System.out.println("Enter female ID");
-        int femaleId = controlMethods.convertInputToInt();
+        int femaleId = ControlMethods.convertInputToInt();
         if((this.getOwnedFishes().get(maleId).getClass().getSimpleName().equalsIgnoreCase(this.getOwnedFishes().get(femaleId).getClass().getSimpleName())) && (this.getOwnedFishes().get(maleId).getGender() != this.getOwnedFishes().get(femaleId).getGender()))
         {
               int breed = (int) (Math.random() * (20))+1;
               if (breed >10)
               {
-                  System.out.println(breed);}
+                  System.out.println("The breeding went successfull, you now have new fish");
+                  //Skapa For loop med Case
+                  myGame.store.addNewFishBreeded(this, new Minnow());
+              }
+              else System.out.println("Sorry the breeding didn´t work");
         }
 
 

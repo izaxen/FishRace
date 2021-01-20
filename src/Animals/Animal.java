@@ -1,7 +1,5 @@
 package Animals;
 
-import java.util.Random;
-
 public abstract class Animal {
     public enum Fishprice {
         MINNOW(30),
@@ -20,13 +18,6 @@ public abstract class Animal {
     private String name;
     private int health = 100;
 
-    public boolean isBreeded() {
-        return breeded;
-    }
-
-    public void setBreeded(boolean breeded) {
-        this.breeded = breeded;
-    }
 
     private String gender;
     private int price;
@@ -135,6 +126,15 @@ public abstract class Animal {
     public void setHealth(int health) {
         this.health = health;
     }
+
+    public boolean isBreeded() {
+        return breeded;
+    }
+
+    public void setBreeded(boolean breeded) {
+        this.breeded = breeded;
+    }
+
 
     public String getGender() {
         return gender;

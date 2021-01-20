@@ -11,8 +11,7 @@ public class Game {
     private ArrayList<Player> contestants = new ArrayList<>();
 
     Store store = new Store(this);
-    MenuSystem menuSystem = new MenuSystem();
-    ControlMethods controlMethods = new ControlMethods();
+    MenuSystem menuSystem = new MenuSystem(this);
 
 
     public ArrayList<Player> getContestants() {
@@ -29,12 +28,13 @@ public class Game {
                 "Please insert how many players 1-4.");
 
         do {
-            inputInt = controlMethods.convertInputToInt();
+            inputInt = ControlMethods.convertInputToInt();
             if (inputInt > 0 && inputInt < 5) {
                 for (int i = 0; i < inputInt; i++) {
                     System.out.printf("Enter player %d name:%n",i+1);
-                    Player player = new Player(controlMethods.inputString());
+                    Player player = new Player(ControlMethods.inputString());
                     contestants.add(player);
+                    player.setMyGame(this);
                 }
 
             } else
@@ -45,7 +45,7 @@ public class Game {
 
         System.out.println("Please insert how many round you want to play 5-30:");
         do {
-            inputInt = controlMethods.convertInputToInt();
+            inputInt = ControlMethods.convertInputToInt();
             if (inputInt > 4 && inputInt < 31)
                 gameRounds = inputInt;
 
@@ -84,7 +84,7 @@ public class Game {
 
         do {
             menuSystem.mainMenu(player);
-            inputInt = controlMethods.convertInputToInt();
+            inputInt = ControlMethods.convertInputToInt();
 
             switch (inputInt) {
                 case 1: {
