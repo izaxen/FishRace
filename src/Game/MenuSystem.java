@@ -11,7 +11,6 @@ public class MenuSystem {
     {this.mygame = mygame;}
 
 
-
     public static String starRow = "*".repeat(61);
 
     private String starRowTitle = "\n" + "*".repeat(61) + "\n" +

@@ -16,7 +16,6 @@ public abstract class Food {
     private int price;
     private int quantityFood = 0;
 
-
     public int getQuantityFood() {
         return quantityFood;
     }

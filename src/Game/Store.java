@@ -10,17 +10,17 @@ public class Store {
 
     private int inputChoice;
 
-    private Game mygame;
+    private Game myGame;
 
-    public Store(Game mygame) {
-        this.mygame = mygame;
+    public Store(Game myGame) {
+        this.myGame = myGame;
 
     }
 
     public void buyFish(Player player) {
 
         do {
-            mygame.menuSystem.fishMenu(player.getMoney(), player);
+            myGame.menuSystem.fishMenu(player.getMoney(), player);
             inputChoice = ControlMethods.convertInputToInt();
 
             if ((inputChoice > 0) && (inputChoice < 7)) {
@@ -104,7 +104,7 @@ public class Store {
                         if (player.isPlayerRoundChoice())
                         break;
                         else
-                            mygame.chooseActionMainMenu(player);
+                            myGame.chooseActionMainMenu(player);
                     }
                     default:
                         System.out.println(ControlMethods.errorNumber);
@@ -132,7 +132,7 @@ public class Store {
 
         do {
             int index = 0;
-            mygame.menuSystem.sellFishMenu(player);
+            myGame.menuSystem.sellFishMenu(player);
             inputChoice = ControlMethods.convertInputToInt();
 
             switch (inputChoice) {
@@ -142,7 +142,7 @@ public class Store {
                     System.out.println(MenuSystem.starRow + "\n");
                     for (Animal fish : player.getOwnedFishes()) {
                         System.out.printf("%1$d\t\t%2$s\t\t%3$s\t\t%4$s\t\t%5$d\t\t%6$d%n", index, fish.getClass().getSimpleName(), fish.getName(), fish.getGender()
-                                , fish.getHealth(), fish.calculateValue());
+                                , fish.health(), fish.calculateValue());
                         index++;
 
                     }
@@ -176,7 +176,7 @@ public class Store {
                     if(player.isPlayerRoundChoice())
                         break;
                     else
-                        mygame.chooseActionMainMenu(player);
+                        myGame.chooseActionMainMenu(player);
 
                 default:
                     System.out.println(ControlMethods.errorNumber);
@@ -188,7 +188,7 @@ public class Store {
     public void buyFood(Player player) {
 
         do {
-           mygame.menuSystem.foodMenu(player.getMoney(), player);
+           myGame.menuSystem.foodMenu(player.getMoney(), player);
             inputChoice = ControlMethods.convertInputToInt();
             switch (inputChoice) {
                 case 1: {
@@ -229,7 +229,7 @@ public class Store {
                     if(player.isPlayerRoundChoice())
                         break;
                     else
-                        mygame.chooseActionMainMenu(player);
+                        myGame.chooseActionMainMenu(player);
             }
         } while (!(inputChoice == 4));    //TODO Fix the loop
     }
@@ -254,7 +254,7 @@ public class Store {
     }
 
     public void sellAllFishEndGame() {
-        for (Player player : mygame.getContestants()) {
+        for (Player player : myGame.getContestants()) {
             if(player.getOwnedFishes().size() != 0)
             for (int i = player.getOwnedFishes().size()-1; i >= 0; i--) {
                 player.setMoney(player.getMoney() + player.getOwnedFishes().get(i).calculateValue());

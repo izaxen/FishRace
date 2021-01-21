@@ -1,6 +1,8 @@
 package Game;
 
-import Animals.Animal;
+import Animals.*;
+import Food.*;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 
@@ -12,8 +14,9 @@ public class Game {
     private ArrayList<Player> contestants = new ArrayList<>();
 
     Store store = new Store(this);
-    MenuSystem menuSystem = new MenuSystem(this);
+    public MenuSystem menuSystem = new MenuSystem(this);
     Breeding breeding = new Breeding(this);
+    Feeding feeding = new Feeding(this);
 
 
     public Game() {
@@ -46,7 +49,7 @@ public class Game {
         do {
             inputInt = ControlMethods.convertInputToInt();
             if (inputInt > 4 && inputInt < 31)
-                gameRounds = 2; //TODO inputInt;
+                gameRounds = inputInt;
 
             else
                 System.out.println(ControlMethods.errorNumber);
@@ -86,37 +89,19 @@ public class Game {
             inputInt = ControlMethods.convertInputToInt();
 
             switch (inputInt) {
-                case 1: {
-                    // Buy fish
-                    store.buyFish(player);
-                    break;
-                }
-                case 2: {
-                    //Sell fish
-                    store.sellFishChoice(player);
+                case 1 -> store.buyFish(player); // Buy fish
 
-                    break;
-                }
-                case 3: {
-                    //Buy food
-                    store.buyFood(player);
-                    break;
-                }
-                case 4: {
-                    //Feed fish
-                    player.feedYourFish();
+                case 2 -> store.sellFishChoice(player);  //Sell fish
 
-                    break;
-                }
-                case 5: {
-                    //breed fish
-                    breeding.checkForPossibleBreedingCouples(player);
+                case 3 ->store.buyFood(player); //Buy food
+
+                case 4 -> feeding.chooseFoodToFeedWith(player); //Feed fish
+
+                case 5 -> breeding.checkForPossibleBreedingCouples(player);
+
+                default -> System.out.println(ControlMethods.errorNumber);
                 }
 
-                default: {
-                    System.out.println(ControlMethods.errorNumber);
-                }
-            }
 
         } while ((inputInt < 1) || (inputInt > 6));
     }
