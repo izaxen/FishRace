@@ -3,16 +3,19 @@ package Game;
 import Animals.*;
 import Food.*;
 
+import java.io.File;
 import java.io.Serializable;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.nio.file.*;
 
 
 public class Game implements Serializable {
     private int inputInt;
     private int gameRounds;
-    public static int gameRoundsLeft;
+    private int activePlayer = 0;
+    private int gameRoundsLeft = 1;
+    public static int activeGameRound = 1;
 
     private ArrayList<Player> contestants = new ArrayList<>();
 
@@ -20,6 +23,8 @@ public class Game implements Serializable {
     public MenuSystem menuSystem = new MenuSystem();
     Breeding breeding = new Breeding(this);
     Feeding feeding = new Feeding(this);
+    GameLoader gameLoader = new GameLoader(this);
+
 
 
     public Game() {
@@ -28,50 +33,68 @@ public class Game implements Serializable {
 
     private void setupGame() {
 
-        menuSystem.mainScreen();
-        System.out.println("Welcome, now we gonna setup the game\n\n" +
-                "Please insert how many players 1-4.");
+        System.out.println("load game 1");
+        int loadgame = 10;
 
-        inputInt = ControlMethods.convertInputToInt(1, 4);
-        for (int i = 0; i < inputInt; i++) {
-            System.out.printf("Enter player %d name:%n", i + 1);
-            Player player = new Player(ControlMethods.inputString());
-            contestants.add(player);
-            player.setMyGame(this);
+        if (loadgame == 0) {
+
+            menuSystem.mainScreen();
+            System.out.println("Welcome, now we gonna setup the game\n\n" +
+                    "Please insert how many players 1-4.");
+
+            inputInt = ControlMethods.convertInputToInt(1, 4);
+            for (int i = 0; i < inputInt; i++) {
+                System.out.printf("Enter player %d name:%n", i + 1);
+                Player player = new Player(ControlMethods.inputString());
+                contestants.add(player);
+                player.setMyGame(this);
+            }
+
+
+            System.out.println("Please insert how many round you want to play 5-30:");
+            gameRounds = ControlMethods.convertInputToInt(5, 30);
+            gamePlay();
         }
 
-        System.out.println("Please insert how many round you want to play 5-30:");
-        gameRounds = ControlMethods.convertInputToInt(5, 30);
-        gamePlay();
+        if (loadgame ==10) gameLoader.loadGame();
     }
 
-    private void gamePlay() {
-        for (int i = 0; i < gameRounds; i++) {
-            gameRoundsLeft = gameRoundsLeft + 1;
-            for (Player player : contestants) {
+    public void gamePlay() {
+
+        while (activeGameRound < gameRounds) {
+
+            while (activePlayer < contestants.size() )
+             {  Player playa = contestants.get(activePlayer);
                 ControlMethods.clearScreen();
-                if ((player.isPlayerActive()) && (i > 0)) {
-                    player.setPlayerRoundChoice(false);
-                    for (Animal fish : player.getOwnedFishes()) {
+
+                if ((playa.isPlayerActive()) && (gameRoundsLeft > 1)) {
+                    playa.setPlayerRoundChoice(false);
+                    for (Animal fish : playa.getOwnedFishes()) {
                         fish.decreaseHealthAndAge();
                     }
-                    player.deathHealthAgeLoop();
+                    playa.deathHealthAgeLoop();
                 }
-                if (player.isPlayerActive()) {
-                    chooseActionMainMenu(player);
+                if (playa.isPlayerActive()) {
+                    chooseActionMainMenu(playa);
                 } else
-                    System.out.println(player.getName() + " is out of the game\n" +
-                            "Next player");
-            }
+                {System.out.println(playa.getName() + " is out of the game\n" +
+                            "Next player");}
+                activePlayer++;
+
+             }
+            activePlayer = 0;
+            gameRoundsLeft++;
+            activeGameRound++;
         }
         store.sellAllFishEndGame();
         endGameScoreList();
+
     }
 
     public void chooseActionMainMenu(Player player) {
         do {
             menuSystem.mainMenu(player);
-            inputInt = ControlMethods.convertInputToInt(1, 7);
+            inputInt = ControlMethods.convertInputToInt(1, 9);//TODO Fix Load game
             switch (inputInt) {
                 case 1 -> store.buyFishChoice(player);
                 case 2 -> store.sellFishChoice(player);
@@ -80,8 +103,10 @@ public class Game implements Serializable {
                 case 5 -> breeding.checkForPossibleBreedingCouples(player);
                 case 6 -> store.listOwnedFish(player);
                 case 7 -> System.out.println("Lazy one");
+                case 8 -> gameLoader.saveGame(this);
+                case 9 -> gameLoader.loadGame();
             }
-        } while ((inputInt == 6) || ((inputInt == 5) && (!player.isPlayerRoundChoice())));
+        } while (((inputInt == 6) || (inputInt == 8) || ((inputInt == 5) && (!player.isPlayerRoundChoice()))));
     }
 
     private void endGameScoreList() {
@@ -131,26 +156,4 @@ public class Game implements Serializable {
         return contestants;
     }
 
-    public void saveGame() {
-        do {
-            System.out.println("Enter name on savefile:");
-            String filePath = ControlMethods.inputString() + ".ser";
-            if (!Files.exists(Paths.get(filePath))) {
-                Serializer.serialize(filePath, getContestants());
-                System.out.println("Created a savefile namned " + filePath);
-                return;
-            } else {
-                System.out.println("Filename already exist.");
-                System.out.println("[1] Overwrite existing savefile\n" +
-                        "[2] Create a new one");
-                if (ControlMethods.convertInputToInt(1, 2) == 1) {
-                    Serializer.serialize(filePath, getContestants());
-                    System.out.println("Created a savefile namned " + filePath);
-                    return;
-                }
-
-            }
-
-        } while (true);
-    }
 }

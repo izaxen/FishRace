@@ -33,7 +33,7 @@ public class MenuSystem implements Serializable {
         System.out.printf("%s%n*\t\t\t\t\t\t\t\t%s \t\t\t\t\t\t\t *%n" +
                         "* \tPlayername: %-14.12s \t\tBank: %6.6s kr \t\t\t\tRound: %s \t *%n" +
                         "* \tOwned fish: %-3.3s\t\t\tOwned food: FLAKES: %-3.3s\tTETRABITS: %-3.3s\tMEAT: %-3.3s\t *%n" +
-                        "%1$s%n", starRow, "Starfishy Fish Menu ", player.getName(), player.getMoney(), Game.gameRoundsLeft, player.getOwnedFishes().size(),
+                        "%1$s%n", starRow, "Starfishy Fish Menu ", player.getName(), player.getMoney(), Game.activeGameRound, player.getOwnedFishes().size(),
                 player.getOwnedFood()[0].getQuantityFood(), player.getOwnedFood()[1].getQuantityFood(), player.getOwnedFood()[2].getQuantityFood());
         System.out.println(
                 "* [1] Buy fish" + "\t".repeat(17) + " *\n" +
@@ -42,7 +42,8 @@ public class MenuSystem implements Serializable {
                         "* [4] Feed your fish" + "\t".repeat(15) + " *\n" +
                         "* [5] Try to breed your fish" + "\t".repeat(13) + " *\n" +
                         "* [6] Show owned fish" + "\t".repeat(15) + " *\n" +
-                        "* [7] Sit back and go to next round" + "\t".repeat(12) + " *\n");
+                        "* [7] Sit back and go to next round" + "\t".repeat(12) + " *\n" +
+                        "* [8] Save game");
 
     }
 
@@ -52,7 +53,7 @@ public class MenuSystem implements Serializable {
         System.out.printf("%s%n*\t\t\t\t\t\t\t\t%s \t\t\t\t\t\t\t *%n" +
                         "* \tPlayername: %-14.12s \t\tBank: %6.6s kr \t\t\t\tRound: %s \t *%n" +
                         "* \tOwned fish: %-3.3s\t\t\tOwned food: FLAKES: %-3.3s\tTETRABITS: %-3.3s\tMEAT: %-3.3s\t *%n" +
-                        "%1$s%n", starRow, "Starfishy Fish Menu ", player.getName(), player.getMoney(), Game.gameRoundsLeft, player.getOwnedFishes().size(),
+                        "%1$s%n", starRow, "Starfishy Fish Menu ", player.getName(), player.getMoney(), Game.activeGameRound, player.getOwnedFishes().size(),
                 player.getOwnedFood()[0].getQuantityFood(), player.getOwnedFood()[1].getQuantityFood(), player.getOwnedFood()[2].getQuantityFood());
         System.out.printf("*%4.3s %-15.15s" + "\t".repeat(5) + "%-5.5s" + "\t".repeat(4) + "%-10s%n%n","ID","TYPE", "PRICE", "Available in store   *");
 
@@ -86,7 +87,7 @@ public class MenuSystem implements Serializable {
         else System.out.println("* [ ] " + Animal.Fishprice.HYPERANCISTRUS_ZEBRA + "\t".repeat(4) + "Out of stock" + "\t".repeat(7)+" *");
 
         if (player.isPlayerRoundChoice())
-            System.out.println("* [6] End turn" + "\t".repeat(17) + "*");
+            System.out.println("* [6] End turn" + "\t".repeat(17) + " *");
         else
             System.out.println("* [6] Go back" + "\t".repeat(17) + " *");
 
@@ -100,7 +101,7 @@ public class MenuSystem implements Serializable {
         System.out.printf("%s%n*\t\t\t\t\t\t\t\t%s \t\t\t\t\t\t\t *%n" +
                         "* \tPlayername: %-14.12s \t\tBank: %6.6s kr \t\t\t\tRound: %s \t *%n" +
                         "* \tOwned fish: %-3.3s\t\t\tOwned food: FLAKES: %-3.3s\tTETRABITS: %-3.3s\tMEAT: %-3.3s\t *%n" +
-                        "%1$s%n", starRow, "Starfishy Fish Menu ", player.getName(), player.getMoney(), Game.gameRoundsLeft, player.getOwnedFishes().size(),
+                        "%1$s%n", starRow, "Starfishy Fish Menu ", player.getName(), player.getMoney(), Game.activeGameRound, player.getOwnedFishes().size(),
                 player.getOwnedFood()[0].getQuantityFood(), player.getOwnedFood()[1].getQuantityFood(), player.getOwnedFood()[2].getQuantityFood());
         System.out.printf("*%4.3s %-15.15s" + "\t".repeat(5) + "%-5.5s" + "\t".repeat(4) + "%-10s%n%n","ID","TYPE", "PRICE", "Available in store   *");
 
@@ -135,7 +136,7 @@ public class MenuSystem implements Serializable {
         System.out.printf("%s%n*\t\t\t\t\t\t\t\t%s \t\t\t\t\t\t\t *%n" +
                         "* \tPlayername: %-14.12s \t\tBank: %6.6s kr \t\t\t\tRound: %s \t *%n" +
                         "* \tOwned fish: %-3.3s\t\t\tOwned food: FLAKES: %-3.3s\tTETRABITS: %-3.3s\tMEAT: %-3.3s\t *%n" +
-                        "%1$s%n", starRow, "Starfishy Fish Menu ", player.getName(), player.getMoney(), Game.gameRoundsLeft, player.getOwnedFishes().size(),
+                        "%1$s%n", starRow, "Starfishy Fish Menu ", player.getName(), player.getMoney(), Game.activeGameRound, player.getOwnedFishes().size(),
                 player.getOwnedFood()[0].getQuantityFood(), player.getOwnedFood()[1].getQuantityFood(), player.getOwnedFood()[2].getQuantityFood());
 
         System.out.println("* [1] Show list of available fish" + "\t".repeat(12) + " *");
@@ -155,7 +156,7 @@ public class MenuSystem implements Serializable {
         System.out.printf("%s%n*\t\t\t\t\t\t\t\t%s \t\t\t\t\t\t\t *%n" +
                         "* \tPlayername: %-14.12s \t\tBank: %6.6s kr \t\t\t\tRound: %s \t *%n" +
                         "* \tOwned fish: %-3.3s\t\t\tOwned food: FLAKES: %-3.3s\tTETRABITS: %-3.3s\tMEAT: %-3.3s\t *%n" +
-                        "%1$s%n", starRow, "Starfishy Fish Menu ", player.getName(), player.getMoney(), Game.gameRoundsLeft, player.getOwnedFishes().size(),
+                        "%1$s%n", starRow, "Starfishy Fish Menu ", player.getName(), player.getMoney(), Game.activeGameRound, player.getOwnedFishes().size(),
                 player.getOwnedFood()[0].getQuantityFood(), player.getOwnedFood()[1].getQuantityFood(), player.getOwnedFood()[2].getQuantityFood());
 
         for (Animal fish: player.getOwnedFishes()){

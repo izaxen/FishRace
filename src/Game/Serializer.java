@@ -1,7 +1,7 @@
 package Game;
 import java.io.*;
 
-public class Serializer {
+public class Serializer implements Serializable{
     static public boolean serialize(String filePath, Object data) {
 
         try {
@@ -48,7 +48,7 @@ public class Serializer {
         }
 
         catch(Exception error){
-
+            System.out.println(error);
             return false; // we couldn't complete deserialization
 
         }

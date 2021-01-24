@@ -10,9 +10,8 @@ public class Player implements Serializable {
 
     private Game myGame;
 
-
     private String name;
-    private int money = 29;
+    private int money = 600;
     private boolean playerActive = true;
     private boolean playerRoundChoice = false;
 
