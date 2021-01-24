@@ -1,6 +1,8 @@
 package Food;
 
-public abstract class Food {
+import java.io.Serializable;
+
+public abstract class Food implements Serializable {
     public enum FoodPrice {
         FLAKES(2),
         TETRABITS(15),

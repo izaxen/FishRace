@@ -8,7 +8,7 @@ public class Minnow extends Animal {
     setMaxAgeFish(5);
     setHealthBoostFlakes(10);
     setOffspring((int) (Math.random() * (10))+5);
-    setBreedChance(20);
+    setBreedChance(30);
    }
    @Override
    public int calculateValue(){

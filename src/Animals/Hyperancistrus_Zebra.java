@@ -9,7 +9,7 @@ public class Hyperancistrus_Zebra extends Animal {
         setMaxAgeFish(10);
         setHealthBoostTetrabits(15);
         setHealthBoostMeat(20);
-        setOffspring((int) (Math.random() * (10)) + 5);
+        setOffspring((int) (Math.random() * (15)) + 5);
         setBreedChance(15);
     }
 

@@ -11,7 +11,7 @@ public class Angelfish extends Animal {
         setHealthBoostFlakes(5);
         setHealthBoostTetrabits(20);
         setHealthBoostMeat(10);
-        setOffspring((int) (Math.random() * (20)) + 10);
+        setOffspring((int) (Math.random() * (10)) + 10);
         setBreedChance(18);
     }
 

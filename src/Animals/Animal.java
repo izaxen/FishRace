@@ -1,6 +1,8 @@
 package Animals;
 
-public abstract class Animal {
+import java.io.Serializable;
+
+public abstract class Animal implements Serializable {
     public enum Fishprice {
         MINNOW(30),
         CORYDORAS_STERBAI(80),
@@ -30,7 +32,7 @@ public abstract class Animal {
     private boolean tetrabits = false;
     private boolean meat = false;
     private boolean breeded = false;
-    private boolean doneBreeding = false;
+    private boolean doneBreeding = true;
 
 
 
@@ -51,13 +53,12 @@ public abstract class Animal {
         this.gender = gender;
     }
 
+
+
     public void decreaseHealthAndAge() {
         this.health -= (int) (Math.random() * (20)) + 10; //10-30% of the HP will disappear
         this.ageFish = this.ageFish + 1;
-        if ((this.health > 0) && (this.ageFish <= this.maxAgeFish)) {
-            System.out.println(this.health + " in health left for " + this.getName() + ". Of the type " + this.getClass().getSimpleName() + "" +
-                    "\nAnd have reached the age of " + this.ageFish);
-        }
+
     }
 
     public int calculateValue() {
@@ -172,6 +173,8 @@ public abstract class Animal {
     public int getHealthBoostTetrabits() {return HealthBoostTetrabits;}
 
     public int getHealthBoostMeat() {return HealthBoostMeat;}
+
+    public int getHealth() {return health;}
 }
 
 
