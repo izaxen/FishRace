@@ -16,9 +16,10 @@ public class GameLoader implements Serializable {
 
     public void saveGame(Game GameLoader) {
         do {
-            System.out.println("Enter name on savefile:");
-            String fileName = ControlMethods.inputString() + ".ser";
-            String filePath = "c:/testsave/";
+            System.out.println("\nEnter name on savefile:");
+            String fileName = ControlMethods.inputString().toLowerCase() + ".ser";
+            String filePath = "c:/StayfishySaveFiles/";
+            createControlSaveFolder(filePath);
             if (!Files.exists(Paths.get(fileName))) {
                 boolean saveStatus = Serializer.serialize(filePath+ fileName, myGame);
                 if (saveStatus) {
@@ -38,9 +39,9 @@ public class GameLoader implements Serializable {
         } while (true);
     }
 
-    void loadGame(){
-        String[] pathnames;
-        File f = new File("C:/testsave");
+    public void loadGame(){
+        String[] pathNames;
+        File f = new File("C:/StayfishySaveFiles/");
 
         FilenameFilter filter = new FilenameFilter() {
             @Override
@@ -48,18 +49,39 @@ public class GameLoader implements Serializable {
                 return name.endsWith(".ser");
             }
         };
+        pathNames = f.list(filter);
+        System.out.println("\nYour saved files\n");
+        for (String pathname : pathNames)
+        System.out.println(pathname.replaceAll(".ser",""));
 
-        pathnames = f.list(filter);
+        System.out.println("\nChoose which save file you want to load.");
+        String loadString = "c:/testsave/"+ControlMethods.inputString().toLowerCase()+".ser";
+        try {
+        myGame = (Game) Serializer.deserialize(loadString);
+        myGame.gamePlay();}
+        catch (Exception e){
+            System.out.println("Something went wrong with the loadfile. Please try again");
+            loadGame();
+        }
+        System.out.println("Game loaded correctly, press enter to continue");
+        ControlMethods.inputString();
+    }
+    private void createControlSaveFolder(String filePath){
 
-        for (String pathname : pathnames)
-
-            System.out.println(pathname);
-
-        myGame = (Game) Serializer.deserialize("test.ser");
-        myGame.gamePlay();
-
-
-
-
+        File theDir = new File(filePath);
+        if(!theDir.exists()){
+            System.out.println("Creating saving directory "+ theDir.getName());
+            boolean result = false;
+            try{
+                theDir.mkdirs();
+                result = true;
+            }
+            catch (SecurityException se){
+                System.out.println(se.getMessage());
+            }
+            if (result){
+                System.out.println("Folder created");
+            }
+        }
     }
 }

@@ -7,11 +7,12 @@ import java.io.Serializable;
 
 public class MenuSystem implements Serializable {
 
-    public static String starRow = "*".repeat(82);
+    private final Game myGame;
 
-    private String starRowTitle = "\n" + "*".repeat(82) + "\n" +
-            "* \t\t\t\t\t\t Stayfishy\t\t\t\t\t\t\t*\n" +
-            "*".repeat(82);
+    public MenuSystem(Game mygame){
+        this.myGame = mygame;
+    }
+    public static String starRow = "*".repeat(82);
 
     public void mainScreen() {
 
@@ -33,7 +34,7 @@ public class MenuSystem implements Serializable {
         System.out.printf("%s%n*\t\t\t\t\t\t\t\t%s \t\t\t\t\t\t\t *%n" +
                         "* \tPlayername: %-14.12s \t\tBank: %6.6s kr \t\t\t\tRound: %s \t *%n" +
                         "* \tOwned fish: %-3.3s\t\t\tOwned food: FLAKES: %-3.3s\tTETRABITS: %-3.3s\tMEAT: %-3.3s\t *%n" +
-                        "%1$s%n", starRow, "Starfishy Fish Menu ", player.getName(), player.getMoney(), Game.activeGameRound, player.getOwnedFishes().size(),
+                        "%1$s%n", starRow, "Starfishy Fish Menu ", player.getName(), player.getMoney(), myGame.getGameRoundsLeft(), player.getOwnedFishes().size(),
                 player.getOwnedFood()[0].getQuantityFood(), player.getOwnedFood()[1].getQuantityFood(), player.getOwnedFood()[2].getQuantityFood());
         System.out.println(
                 "* [1] Buy fish" + "\t".repeat(17) + " *\n" +
@@ -43,7 +44,8 @@ public class MenuSystem implements Serializable {
                         "* [5] Try to breed your fish" + "\t".repeat(13) + " *\n" +
                         "* [6] Show owned fish" + "\t".repeat(15) + " *\n" +
                         "* [7] Sit back and go to next round" + "\t".repeat(12) + " *\n" +
-                        "* [8] Save game");
+                        "* [8] Save game" + "\t".repeat(17) + " *\n" +
+                        "* [9] Load game" + "\t".repeat(17) + " *\n");
 
     }
 
@@ -53,14 +55,14 @@ public class MenuSystem implements Serializable {
         System.out.printf("%s%n*\t\t\t\t\t\t\t\t%s \t\t\t\t\t\t\t *%n" +
                         "* \tPlayername: %-14.12s \t\tBank: %6.6s kr \t\t\t\tRound: %s \t *%n" +
                         "* \tOwned fish: %-3.3s\t\t\tOwned food: FLAKES: %-3.3s\tTETRABITS: %-3.3s\tMEAT: %-3.3s\t *%n" +
-                        "%1$s%n", starRow, "Starfishy Fish Menu ", player.getName(), player.getMoney(), Game.activeGameRound, player.getOwnedFishes().size(),
+                        "%1$s%n", starRow, "Starfishy Fish Menu ", player.getName(), player.getMoney(), myGame.getGameRoundsLeft(), player.getOwnedFishes().size(),
                 player.getOwnedFood()[0].getQuantityFood(), player.getOwnedFood()[1].getQuantityFood(), player.getOwnedFood()[2].getQuantityFood());
         System.out.printf("*%4.3s %-15.15s" + "\t".repeat(5) + "%-5.5s" + "\t".repeat(4) + "%-10s%n%n","ID","TYPE", "PRICE", "Available in store   *");
 
 
         if (availableMoney >= Animal.Fishprice.MINNOW.fishPrice)
             System.out.printf("* [1] %-15.15s" + "\t".repeat(5) + "%-2.3s kr" + "\t".repeat(4) + "%10s st\t\t *%n",Animal.Fishprice.MINNOW, Animal.Fishprice.MINNOW.fishPrice,
-                    ((int) player.getMoney()/ Animal.Fishprice.MINNOW.fishPrice));
+                    ((int)player.getMoney() / Animal.Fishprice.MINNOW.fishPrice));
         else
             System.out.println("* [ ] " + Animal.Fishprice.MINNOW + "\t".repeat(7) + "Out of stock" + "\t".repeat(7)+" *");
 
@@ -101,7 +103,7 @@ public class MenuSystem implements Serializable {
         System.out.printf("%s%n*\t\t\t\t\t\t\t\t%s \t\t\t\t\t\t\t *%n" +
                         "* \tPlayername: %-14.12s \t\tBank: %6.6s kr \t\t\t\tRound: %s \t *%n" +
                         "* \tOwned fish: %-3.3s\t\t\tOwned food: FLAKES: %-3.3s\tTETRABITS: %-3.3s\tMEAT: %-3.3s\t *%n" +
-                        "%1$s%n", starRow, "Starfishy Fish Menu ", player.getName(), player.getMoney(), Game.activeGameRound, player.getOwnedFishes().size(),
+                        "%1$s%n", starRow, "Starfishy Fish Menu ", player.getName(), player.getMoney(), myGame.getGameRoundsLeft(), player.getOwnedFishes().size(),
                 player.getOwnedFood()[0].getQuantityFood(), player.getOwnedFood()[1].getQuantityFood(), player.getOwnedFood()[2].getQuantityFood());
         System.out.printf("*%4.3s %-15.15s" + "\t".repeat(5) + "%-5.5s" + "\t".repeat(4) + "%-10s%n%n","ID","TYPE", "PRICE", "Available in store   *");
 
@@ -136,7 +138,7 @@ public class MenuSystem implements Serializable {
         System.out.printf("%s%n*\t\t\t\t\t\t\t\t%s \t\t\t\t\t\t\t *%n" +
                         "* \tPlayername: %-14.12s \t\tBank: %6.6s kr \t\t\t\tRound: %s \t *%n" +
                         "* \tOwned fish: %-3.3s\t\t\tOwned food: FLAKES: %-3.3s\tTETRABITS: %-3.3s\tMEAT: %-3.3s\t *%n" +
-                        "%1$s%n", starRow, "Starfishy Fish Menu ", player.getName(), player.getMoney(), Game.activeGameRound, player.getOwnedFishes().size(),
+                        "%1$s%n", starRow, "Starfishy Fish Menu ", player.getName(), player.getMoney(), myGame.getGameRoundsLeft(), player.getOwnedFishes().size(),
                 player.getOwnedFood()[0].getQuantityFood(), player.getOwnedFood()[1].getQuantityFood(), player.getOwnedFood()[2].getQuantityFood());
 
         System.out.println("* [1] Show list of available fish" + "\t".repeat(12) + " *");
@@ -156,7 +158,7 @@ public class MenuSystem implements Serializable {
         System.out.printf("%s%n*\t\t\t\t\t\t\t\t%s \t\t\t\t\t\t\t *%n" +
                         "* \tPlayername: %-14.12s \t\tBank: %6.6s kr \t\t\t\tRound: %s \t *%n" +
                         "* \tOwned fish: %-3.3s\t\t\tOwned food: FLAKES: %-3.3s\tTETRABITS: %-3.3s\tMEAT: %-3.3s\t *%n" +
-                        "%1$s%n", starRow, "Starfishy Fish Menu ", player.getName(), player.getMoney(), Game.activeGameRound, player.getOwnedFishes().size(),
+                        "%1$s%n", starRow, "Starfishy Fish Menu ", player.getName(), player.getMoney(), myGame.getGameRoundsLeft(), player.getOwnedFishes().size(),
                 player.getOwnedFood()[0].getQuantityFood(), player.getOwnedFood()[1].getQuantityFood(), player.getOwnedFood()[2].getQuantityFood());
 
         for (Animal fish: player.getOwnedFishes()){

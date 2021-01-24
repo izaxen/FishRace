@@ -11,6 +11,7 @@ public class ControlMethods implements Serializable {
     public static String maxFishToBuy = "Max fish to buy is ";
     public static String errorOutOfStock = " Out of stock";
 
+
     public static void clearScreen() {
         try {
             if (System.getProperty("os.name").contains("Windows")) {

@@ -2,41 +2,36 @@ package Game;
 
 import Animals.*;
 import Food.*;
-
-import java.io.File;
 import java.io.Serializable;
-import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Comparator;
 
 
 public class Game implements Serializable {
+
     private int inputInt;
     private int gameRounds;
     private int activePlayer = 0;
     private int gameRoundsLeft = 1;
-    public static int activeGameRound = 1;
-
-    private ArrayList<Player> contestants = new ArrayList<>();
+    private final ArrayList<Player> contestants = new ArrayList<>();
 
     Store store = new Store(this);
-    public MenuSystem menuSystem = new MenuSystem();
+    public MenuSystem menuSystem = new MenuSystem(this);
     Breeding breeding = new Breeding(this);
     Feeding feeding = new Feeding(this);
     GameLoader gameLoader = new GameLoader(this);
-
-
 
     public Game() {
         setupGame();
     }
 
     private void setupGame() {
+        System.out.printf("%n%1$s%n*\t\t\t\t\t\t\tWelcome to the game Stayfishy\t\t\t\t\t\t *%n%1$s%n", MenuSystem.starRow);
+        System.out.println("\t\t\t\t\t\t\t[1] Start a new game\n" +
+                "\t\t\t\t\t\t\t[2] Load Game\n");
+        int loadGame = ControlMethods.convertInputToInt(1,2);
 
-        System.out.println("load game 1");
-        int loadgame = 10;
-
-        if (loadgame == 0) {
+        if (loadGame == 1) {
 
             menuSystem.mainScreen();
             System.out.println("Welcome, now we gonna setup the game\n\n" +
@@ -56,12 +51,12 @@ public class Game implements Serializable {
             gamePlay();
         }
 
-        if (loadgame ==10) gameLoader.loadGame();
+        if (loadGame ==2) gameLoader.loadGame();
     }
 
     public void gamePlay() {
 
-        while (activeGameRound < gameRounds) {
+        while (gameRoundsLeft < gameRounds) {
 
             while (activePlayer < contestants.size() )
              {  Player playa = contestants.get(activePlayer);
@@ -84,8 +79,7 @@ public class Game implements Serializable {
              }
             activePlayer = 0;
             gameRoundsLeft++;
-            activeGameRound++;
-        }
+                    }
         store.sellAllFishEndGame();
         endGameScoreList();
 
@@ -154,6 +148,9 @@ public class Game implements Serializable {
 
     public ArrayList<Player> getContestants() {
         return contestants;
+    }
+    public int getGameRoundsLeft() {
+        return gameRoundsLeft;
     }
 
 }
