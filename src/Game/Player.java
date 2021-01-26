@@ -11,7 +11,7 @@ public class Player implements Serializable {
     private Game myGame;
 
     private String name;
-    private int money = 600;
+    private int money = 3000;
     private boolean playerActive = true;
     private boolean playerRoundChoice = false;
 
@@ -47,7 +47,7 @@ public class Player implements Serializable {
             }
             if ((fish.getAgeFish()+3)> fish.getMaxAgeFish())
                 System.out.println(fish.getName() + ". Of the type " + fish.getClass().getSimpleName()
-                + " has left then 3 years left to live");
+                + " has less then 3 years to live");
         }
         System.out.println("\n");
         if ((this.getOwnedFishes().size() == 0) && (this.getMoney() == 0)) {

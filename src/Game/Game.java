@@ -55,7 +55,7 @@ public class Game implements Serializable {
     }
 
     public void gamePlay() {
-        while (gameRoundsLeft < gameRounds) {
+        while (gameRoundsLeft <= gameRounds) {
             while (activePlayer < contestants.size() )
              {  Player playa = contestants.get(activePlayer);
                 GameUtils.clearScreen();
