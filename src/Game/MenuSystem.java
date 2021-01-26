@@ -44,7 +44,8 @@ public class MenuSystem implements Serializable {
                         "* [7] Show owned fish" + "\t".repeat(15) + " *\n" +
                         "* [8] Save game" + "\t".repeat(17) + " *\n" +
                         "* [9] Load game" + "\t".repeat(17) + " *\n"+
-                        "* [10] Helpscreen" + "\t".repeat(16) + " *");
+                        "* [10] Helpscreen" + "\t".repeat(16) + " *\n" +
+                        "* [11] Quit game" + "\t".repeat(16) + " *");
 
     }
 

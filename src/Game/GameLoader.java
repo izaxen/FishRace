@@ -8,9 +8,9 @@ import java.nio.file.Paths;
 
 public class GameLoader implements Serializable {
 
-   private Game myGame;
+    private Game myGame;
 
-    public GameLoader (Game myGame){
+    public GameLoader(Game myGame) {
         this.myGame = myGame;
     }
 
@@ -21,17 +21,17 @@ public class GameLoader implements Serializable {
             String filePath = "StayfishySaveFiles/";
             createControlSaveFolder(filePath);
             if (!Files.exists(Paths.get(fileName))) {
-                boolean saveStatus = Serializer.serialize(filePath+ fileName, myGame);
+                boolean saveStatus = Serializer.serialize(filePath + fileName, myGame);
                 if (saveStatus) {
                     System.out.println("Created a savefile namned " + fileName);
-                return;}
-                else System.out.println("Error has occured during save");
+                    return;
+                } else System.out.println("Error has occured during save");
             } else {
                 System.out.println("Filename already exist.");
                 System.out.println("[1] Overwrite existing savefile\n" +
                         "[2] Create a new one");
                 if (GameUtils.convertInputToInt(1, 2) == 1) {
-                    Serializer.serialize(filePath+ fileName, myGame);
+                    Serializer.serialize(filePath + fileName, myGame);
                     System.out.println("Created a savefile namned " + fileName);
                     return;
                 }
@@ -40,23 +40,25 @@ public class GameLoader implements Serializable {
     }
 
     public void loadGame() {
-        String[] pathNames;
+
         File directoryPath = new File("StayfishySaveFiles/");
+        FilenameFilter filter = new FilenameFilter() {
+            @Override
+            public boolean accept(File f, String name) {
+                return name.endsWith(".ser");
+            }
+        };
+        String[] pathNames = directoryPath.list(filter);
 
-        if (directoryPath.exists() && directoryPath.isDirectory()) {
 
-            FilenameFilter filter = new FilenameFilter() {
-                @Override
-                public boolean accept(File f, String name) {
-                    return name.endsWith(".ser");
-                }
-            };
-            pathNames = directoryPath.list(filter);
+        if (directoryPath.exists() && directoryPath.isDirectory() && pathNames != null && pathNames.length > 0) {
+
+
             System.out.println("\nYour saved files\n");
             for (String pathname : pathNames)
                 System.out.println(pathname.replaceAll(".ser", ""));
 
-            System.out.println("\nChoose which save file you want to load. If no saved files available press enter");
+            System.out.println("\nChoose which save file you want to load.");
             String loadString = "StayFishySaveFiles/" + GameUtils.inputString().toLowerCase() + ".ser";
             try {
                 myGame = (Game) Serializer.deserialize(loadString);
@@ -70,27 +72,27 @@ public class GameLoader implements Serializable {
                 else
                     myGame.setupGame();
             }
-            System.out.println("Game loaded correctly, press enter to continue");
-            GameUtils.inputString();
+            System.out.println("Game loaded correctly");
+            GameUtils.waitMilliSeconds(1200);
         }
         System.out.println("No saved files available");
         GameUtils.waitMilliSeconds(1200);
         myGame.setupGame();
     }
-    private void createControlSaveFolder(String filePath){
+
+    private void createControlSaveFolder(String filePath) {
 
         File saveFolder = new File(filePath);
-        if(!saveFolder.exists()){
-            System.out.println("Creating saving directory "+ saveFolder.getName());
+        if (!saveFolder.exists()) {
+            System.out.println("Creating saving directory " + saveFolder.getName());
             boolean result = false;
-            try{
+            try {
                 saveFolder.mkdirs();
                 result = true;
-            }
-            catch (SecurityException se){
+            } catch (SecurityException se) {
                 System.out.println(se.getMessage());
             }
-            if (result){
+            if (result) {
                 System.out.println("Folder created");
             }
         }

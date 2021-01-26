@@ -84,7 +84,7 @@ public class Game implements Serializable {
     public void chooseActionMainMenu(Player player) {
         do {
             menuSystem.mainMenu(player);
-            inputInt = GameUtils.convertInputToInt(1, 10);
+            inputInt = GameUtils.convertInputToInt(1, 11);
             switch (inputInt) {
                 case 1 -> store.buyFishChoice(player);
                 case 2 -> store.sellFishChoice(player);
@@ -96,6 +96,7 @@ public class Game implements Serializable {
                 case 8 -> gameLoader.saveGame();
                 case 9 -> gameLoader.loadGame();
                 case 10 ->GameUtils.helpScreen();
+                case 11 ->System.exit(0);
             }
         } while (inputInt > 6 || inputInt == 5 && (!player.isPlayerRoundChoice()));
     }
