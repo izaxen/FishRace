@@ -1,6 +1,8 @@
 package Animals;
 
-public class RandomNames {
+import java.io.Serializable;
+
+public class RandomNames implements Serializable {
 
     public RandomNames(){
     }

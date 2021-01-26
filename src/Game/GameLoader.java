@@ -18,7 +18,7 @@ public class GameLoader implements Serializable {
         do {
             System.out.println("\nEnter name on savefile:");
             String fileName = GameUtils.inputString().toLowerCase() + ".ser";
-            String filePath = "c:/StayfishySaveFiles/";
+            String filePath = "StayfishySaveFiles/";
             createControlSaveFolder(filePath);
             if (!Files.exists(Paths.get(fileName))) {
                 boolean saveStatus = Serializer.serialize(filePath+ fileName, myGame);
@@ -39,37 +39,43 @@ public class GameLoader implements Serializable {
         } while (true);
     }
 
-    public void loadGame(){
+    public void loadGame() {
         String[] pathNames;
-        File directoryPath = new File("C:/StayfishySaveFiles/");
+        File directoryPath = new File("StayfishySaveFiles/");
 
-        FilenameFilter filter = new FilenameFilter() {
-            @Override
-            public boolean accept(File f, String name) {
-                return name.endsWith(".ser");
+        if (directoryPath.exists() && directoryPath.isDirectory()) {
+
+            FilenameFilter filter = new FilenameFilter() {
+                @Override
+                public boolean accept(File f, String name) {
+                    return name.endsWith(".ser");
+                }
+            };
+            pathNames = directoryPath.list(filter);
+            System.out.println("\nYour saved files\n");
+            for (String pathname : pathNames)
+                System.out.println(pathname.replaceAll(".ser", ""));
+
+            System.out.println("\nChoose which save file you want to load. If no saved files available press enter");
+            String loadString = "StayFishySaveFiles/" + GameUtils.inputString().toLowerCase() + ".ser";
+            try {
+                myGame = (Game) Serializer.deserialize(loadString);
+                myGame.gamePlay();
+            } catch (Exception e) {
+                System.out.println("Something went wrong with the loadfile.\n" +
+                        "[1] Try again to load game\n" +
+                        "[2] Go back to start menu");
+                if (GameUtils.convertInputToInt(1, 2) == 1)
+                    loadGame();
+                else
+                    myGame.setupGame();
             }
-        };
-        pathNames = directoryPath.list(filter);
-        System.out.println("\nYour saved files\n");
-        for (String pathname : pathNames)
-        System.out.println(pathname.replaceAll(".ser",""));
-
-        System.out.println("\nChoose which save file you want to load.");
-        String loadString = "c:/testsave/"+ GameUtils.inputString().toLowerCase()+".ser";
-        try {
-        myGame = (Game) Serializer.deserialize(loadString);
-        myGame.gamePlay();}
-        catch (Exception e){
-            System.out.println("Something went wrong with the loadfile.\n" +
-                    "[1] Try again to load game\n" +
-                    "[2] Go back to start menu");
-            if(GameUtils.convertInputToInt(1,2) ==1)
-            loadGame();
-            else
-                myGame.setupGame();
+            System.out.println("Game loaded correctly, press enter to continue");
+            GameUtils.inputString();
         }
-        System.out.println("Game loaded correctly, press enter to continue");
-        GameUtils.inputString();
+        System.out.println("No saved files available");
+        GameUtils.waitMilliSeconds(1200);
+        myGame.setupGame();
     }
     private void createControlSaveFolder(String filePath){
 

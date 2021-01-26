@@ -34,13 +34,13 @@ public class Breeding implements Serializable {
             }
         }
         if (checkBreedable != 0)
-            tryToBreed(player);
+        {tryToBreed(player);
+        return;}
 
         else {
             System.out.println("You have no breedable couples");
         }
-        System.out.println("Press enter to continue");
-        GameUtils.inputString();
+        GameUtils.waitMilliSeconds(1200);
     }
 
     private void tryToBreed(Player player) {
@@ -73,7 +73,10 @@ public class Breeding implements Serializable {
                         case "Hyperancistrus_Zebra" -> addNewFishBreeded(player, new Hyperancistrus_Zebra());
                     }
                 }
-            } else System.out.println("Sorry the breeding didn´t work");
+            } else {
+                System.out.println("Sorry the breeding didn´t work");
+                GameUtils.waitMilliSeconds(1200);
+            }
         }else
         {System.out.println("You have entered invalid ID ");
         checkForPossibleBreedingCouples(player);}

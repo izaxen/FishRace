@@ -24,8 +24,7 @@ public class MenuSystem implements Serializable {
                 "* \t\t\tyou will sell all your fishes and winner is the one with\t\t\t *%n" +
                 "* \t\t\tthe most money left." +"\t".repeat(12)+" *%n%1$s%n", MenuSystem.starRow);
 
-        System.out.println("Press enter to continue");
-        GameUtils.inputString();
+        GameUtils.waitMilliSeconds(3000);
      }
 
     public void mainMenu(Player player) {

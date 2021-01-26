@@ -59,6 +59,14 @@ public class GameUtils implements Serializable {
         Scanner input = new Scanner(System.in);
         return input.nextLine();
     }
+
+    public static void waitMilliSeconds(int ms) {
+        try {
+            Thread.sleep(ms);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
     public static void helpScreen(){
         System.out.printf("%n%1$s%n*\t\t\t\t\t\tWelcome to Stayfishy help section\t\t\t\t\t\t *%n%1$s%n", MenuSystem.starRow);
         System.out.printf("%n%s%n* \t\t\tThe rules of the game is, buy and sell your fishes. Don´t \t\t\t *\n" +
