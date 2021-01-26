@@ -1,4 +1,4 @@
-package Animals;
+package Game.Animals;
 import java.io.Serializable;
 
 public abstract class Animal implements Serializable {

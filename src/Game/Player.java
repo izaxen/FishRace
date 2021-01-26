@@ -1,7 +1,7 @@
 package Game;
 
-import Animals.Animal;
-import Food.*;
+import Game.Animals.Animal;
+import Game.Food.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ public class Player implements Serializable {
     private Game myGame;
 
     private String name;
-    private int money = 3000;
+    private int money = 600;
     private boolean playerActive = true;
     private boolean playerRoundChoice = false;
 

@@ -1,4 +1,4 @@
-package Animals;
+package Game.Animals;
 import Game.*;
 import java.io.Serializable;
 

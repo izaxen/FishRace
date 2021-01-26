@@ -7,7 +7,7 @@ Spelet kan prata engelska eller svenska i sitt användargränssnitt/med spelaren
 
 Skapa ett Java-program i form av en Command Line App (dvs. terminalen är användargränssnitt för in- och utmatning). Programmet ska vara ett spel som fungerar enligt nedanstående beskrivning.
 
-Klasser du ska ha med i din lösning: Game, Player, Store (som man köper och säljer djur till och köper mat ifrån), Animal (abstrakt), Food (abstrakt), samt minst 5 olika klasser av djur som alla ärver från Animal, samt minst 3 olika klasser av mat som alla ärver från Food.
+Klasser du ska ha med i din lösning: Game, Player, Store (som man köper och säljer djur till och köper mat ifrån), Animal (abstrakt), Game.Food (abstrakt), samt minst 5 olika klasser av djur som alla ärver från Animal, samt minst 3 olika klasser av mat som alla ärver från Game.Food.
 
 Spelare ska ha namn och pengar som egenskaper/fält. Djur ska namn, kön och hälsa som egenskaper. Vilka egenskaper/fält (på Player, Animal och övriga klasser), samt metoder som behövs i övrigt får du fundera över och avgöra själv.
 Spelgång och spelregler (G-nivå)

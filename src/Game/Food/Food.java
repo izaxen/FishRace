@@ -1,4 +1,4 @@
-package Food;
+package Game.Food;
 
 import java.io.Serializable;
 

@@ -1,4 +1,4 @@
-package Animals;
+package Game.Animals;
 
 public class Minnow extends Animal {
 

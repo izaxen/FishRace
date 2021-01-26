@@ -1,5 +1,5 @@
-package Food;
-import Animals.*;
+package Game.Food;
+import Game.Animals.*;
 import Game.*;
 import java.io.Serializable;
 

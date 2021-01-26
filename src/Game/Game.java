@@ -1,7 +1,7 @@
 package Game;
 
-import Animals.*;
-import Food.*;
+import Game.Animals.*;
+import Game.Food.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Comparator;

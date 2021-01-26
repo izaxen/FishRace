@@ -1,4 +1,4 @@
-package Food;
+package Game.Food;
 
 public class Meat extends Food{
     public Meat(){

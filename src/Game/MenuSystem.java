@@ -1,7 +1,7 @@
 package Game;
 
-import Animals.Animal;
-import Food.*;
+import Game.Animals.Animal;
+import Game.Food.*;
 
 import java.io.Serializable;
 
