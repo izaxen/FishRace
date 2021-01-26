@@ -117,7 +117,7 @@ public class RandomNames {
                 "Kaiya",
                 "Daphne"};
 
-        return randomFemaleNames[(int) ((Math.random() * 101) + 1)-1];
+        return randomFemaleNames[(int) ((Math.random() * 100) + 1)-1];
     }
 
     private String maleNames() {
@@ -224,7 +224,7 @@ public class RandomNames {
                 "Damian",
                 "Brendan"};
 
-        return randomMaleNames[(int) ((Math.random() * 101) + 1)-1];
+        return randomMaleNames[(int) ((Math.random() * 100) + 1)-1];
     }
 }
 
