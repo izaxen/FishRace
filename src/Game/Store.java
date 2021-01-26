@@ -1,4 +1,4 @@
-package Game; //TODO Lista when selling
+package Game;
 
 import Animals.*;
 import Food.Food;
@@ -21,7 +21,7 @@ public class Store implements Serializable {
         int inputChoiceBFC;
         do {
             myGame.menuSystem.fishMenu(player.getMoney(), player);
-            inputChoiceBFC = ControlMethods.convertInputToInt(1, 6);
+            inputChoiceBFC = GameUtils.convertInputToInt(1, 6);
 
             switch (inputChoiceBFC) {
                 case 1 -> buyFish(player, Animal.Fishprice.MINNOW.fishPrice, inputChoiceBFC);
@@ -54,16 +54,20 @@ public class Store implements Serializable {
                 }
             }
         } else
-            System.out.println(ControlMethods.errorOutOfStock);
+            System.out.println(GameUtils.errorOutOfStock);
     }
 
-    public void addNewFishBought(Player player, Animal toAdd) {
-        System.out.println(ControlMethods.enterName);
-        toAdd.setName(ControlMethods.inputString());
+    public void addNewFishBought(Player player, Animal fishToAdd) {
+        System.out.println(GameUtils.enterName);
+        System.out.println(GameUtils.randomName);
+        fishToAdd.setName(GameUtils.inputString());
         System.out.println("Choose [1] for female and [2] for male if you want to specify gender else the shop will just pick a random");
-        toAdd.setGender(ControlMethods.inputString());
-        player.getOwnedFishes().add(toAdd);
-        System.out.println(toAdd.getName() + " of the type " + toAdd.getClass().getSimpleName() + " has been added to your owned fish.\n");
+        fishToAdd.setGender(GameUtils.inputString());
+        if (fishToAdd.getName().equals("")) {
+            fishToAdd.setName(myGame.randomNames.genderSelectNames(fishToAdd.getGender()));
+        }
+        player.getOwnedFishes().add(fishToAdd);
+        System.out.println(fishToAdd.getName() + " of the type " + fishToAdd.getClass().getSimpleName() + " has been added to your owned fish.\n");
     }
 
     public void sellFishChoice(Player player) {
@@ -71,7 +75,7 @@ public class Store implements Serializable {
         int inputChoiceSFC;
         do {
             myGame.menuSystem.sellFishMenu(player);
-            inputChoiceSFC = ControlMethods.convertInputToInt(1, 3);
+            inputChoiceSFC = GameUtils.convertInputToInt(1, 3);
 
             switch (inputChoiceSFC) {
 
@@ -91,7 +95,7 @@ public class Store implements Serializable {
                     listOwnedFish(player);
                     System.out.println("Choose which fish you want to sell by their ID number\n" +
                             "If you want to sell more then one fish just enter their ID after a blankspace");
-                    String[] numberAsString = ControlMethods.inputString().split(" ");
+                    String[] numberAsString = GameUtils.inputString().split(" ");
                     player.setPlayerRoundChoice(true);
                     for (int i = player.getOwnedFishes().size() - 1; i >= 0; i--) {
 
@@ -120,9 +124,9 @@ public class Store implements Serializable {
 
     private int maxFishToBuy(int maxFishToBuy) {
         do {
-            System.out.println(ControlMethods.maxFishToBuy + maxFishToBuy);
-            System.out.println(ControlMethods.enterQuantity);
-            fishToBuy = ControlMethods.convertInputToInt();
+            System.out.println(GameUtils.maxFishToBuy + maxFishToBuy);
+            System.out.println(GameUtils.enterQuantity);
+            fishToBuy = GameUtils.convertInputToInt();
         } while ((fishToBuy > maxFishToBuy) || (fishToBuy < 1));
         return fishToBuy;
     }
@@ -132,7 +136,7 @@ public class Store implements Serializable {
         int inputChoiceBF;
         do {
             myGame.menuSystem.foodMenu(player.getMoney(), player);
-            inputChoiceBF = ControlMethods.convertInputToInt(1, 4);
+            inputChoiceBF = GameUtils.convertInputToInt(1, 4);
 
             switch (inputChoiceBF) {
                 case 1 -> buyFood(player, inputChoiceBF - 1, Food.FoodPrice.FLAKES);
@@ -152,30 +156,27 @@ public class Store implements Serializable {
         if (maxFoodToBuy > 0) {
             player.setPlayerRoundChoice(true);
 
-            System.out.println(ControlMethods.maxFoodToBuy + maxFoodToBuy);
-            System.out.println(ControlMethods.enterQuantity);
+            System.out.println(GameUtils.maxFoodToBuy + maxFoodToBuy);
+            System.out.println(GameUtils.enterQuantity);
 
-            foodToBuy = ControlMethods.convertInputToInt(1, maxFoodToBuy);
+            foodToBuy = GameUtils.convertInputToInt(1, maxFoodToBuy);
             player.setMoney(player.getMoney() - (type.foodPrice * foodToBuy));
             player.getOwnedFood()[inputChoice].setQuantityFood(player.getOwnedFood()[inputChoice].getQuantityFood() + foodToBuy);
 
             System.out.println("You have bought " + foodToBuy + " new " + type);
         } else
-            System.out.println(ControlMethods.errorOutOfStock);
-
+            System.out.println(GameUtils.errorOutOfStock);
     }
-
 
     public void sellAllFishEndGame() {
         for (Player player : myGame.getContestants()) {
-            if (player.getOwnedFishes().size() != 0)
+            if (player.getOwnedFishes().size() != 0) {
                 for (int i = player.getOwnedFishes().size() - 1; i >= 0; i--) {
                     player.setMoney(player.getMoney() + player.getOwnedFishes().get(i).calculateValue());
                     player.getOwnedFishes().remove(i);
-
                 }
+            }
         }
-
     }
 
     public void listOwnedFish(Player player) {

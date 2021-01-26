@@ -29,6 +29,5 @@ public class Hyperancistrus_Zebra extends Animal {
             calculatedValue = (calculatedValue * 2);
 
         return calculatedValue;
-
     }
 }

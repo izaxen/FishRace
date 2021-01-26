@@ -12,7 +12,7 @@ public class Angelfish extends Animal {
         setHealthBoostTetrabits(20);
         setHealthBoostMeat(10);
         setOffspring((int) (Math.random() * (10)) + 10);
-        setBreedChance(18);
+        setBreedChance(17);
     }
 
     @Override
@@ -21,8 +21,10 @@ public class Angelfish extends Animal {
         int health = this.health();
         int price = this.price();
 
-        if (this.getAgeFish() < 3)
-            calculatedValue = (int) (((health * price) / 100) * 0.90);
+        if (this.getAgeFish() < 2)
+            calculatedValue = (int) (((health * price) / 100) * 0.60);
+        else if (this.getAgeFish() < 4)
+            calculatedValue = (int) (((health * price) / 100) * 1.0);
         else if (this.getAgeFish() < 5)
             calculatedValue = (int) (((health * price) / 100) * 0.7);
         else

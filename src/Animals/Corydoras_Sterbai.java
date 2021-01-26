@@ -8,7 +8,7 @@ public class Corydoras_Sterbai extends Animal {
         setMaxAgeFish(20);
         setHealthBoostTetrabits(15);
         setOffspring((int) (Math.random() * (20))+7);
-        setBreedChance(19);
+        setBreedChance(20);
     }
     @Override
     public int calculateValue(){
@@ -16,7 +16,9 @@ public class Corydoras_Sterbai extends Animal {
         int health = this.health();
         int price = this.price();
 
-        if (this.getAgeFish() < 3)
+        if (this.getAgeFish() < 2)
+            calculatedValue = (int) (((health * price) / 100) * 0.60);
+        else if (this.getAgeFish() < 3)
             calculatedValue = (int) (((health * price) / 100) * 0.95);
         else if (this.getAgeFish() < 5)
             calculatedValue = (int) (((health * price) / 100) * 0.8);
@@ -29,6 +31,5 @@ public class Corydoras_Sterbai extends Animal {
             calculatedValue = (int) (calculatedValue * 1.2);
 
         return calculatedValue;
-
     }
 }

@@ -16,18 +16,17 @@ public class MenuSystem implements Serializable {
 
     public void mainScreen() {
 
-        System.out.printf("%n%1$s%n*\t\t\t\tWelcome to the game Stayfishy\t\t\t\t*%n%1$s%n", starRow);
-        System.out.printf("%n%s%n* The rules of the game is, buy and sell your fishes. Don´t *\n" +
-                "* forget to buy food and feed them or they will die. You can*%n" +
-                "* also try to breed them to earn more money. You can do one *%n" +
-                "* choice a round. When everybody have played the last round *%n" +
-                "* you will sell all your fishes and winner is the one with  *%n" +
-                "* the most money left.%n%1$s%n", starRow);
+        System.out.printf("%n%1$s%n*\t\t\t\t\t\t\t\tWelcome to Stayfishy\t\t\t\t\t\t\t *%n%1$s%n", MenuSystem.starRow);
+        System.out.printf("%n%s%n* \t\t\tThe rules of the game is, buy and sell your fishes. Don´t \t\t\t *\n" +
+                "* \t\t\tforget to buy food and feed them or they will die. You can\t\t\t *%n" +
+                "* \t\t\talso try to breed them to earn more money. You can do one\t\t\t *%n" +
+                "* \t\t\tchoice a round. When everybody have played the last round\t\t\t *%n" +
+                "* \t\t\tyou will sell all your fishes and winner is the one with\t\t\t *%n" +
+                "* \t\t\tthe most money left." +"\t".repeat(12)+" *%n%1$s%n", MenuSystem.starRow);
 
         System.out.println("Press enter to continue");
-        ControlMethods.inputString();
-        ControlMethods.clearScreen();
-    }
+        GameUtils.inputString();
+     }
 
     public void mainMenu(Player player) {
 
@@ -42,10 +41,11 @@ public class MenuSystem implements Serializable {
                         "* [3] Buy food" + "\t".repeat(17) + " *\n" +
                         "* [4] Feed your fish" + "\t".repeat(15) + " *\n" +
                         "* [5] Try to breed your fish" + "\t".repeat(13) + " *\n" +
-                        "* [6] Show owned fish" + "\t".repeat(15) + " *\n" +
-                        "* [7] Sit back and go to next round" + "\t".repeat(12) + " *\n" +
+                        "* [6] Sit back and go to next round" + "\t".repeat(12) + " *\n" +
+                        "* [7] Show owned fish" + "\t".repeat(15) + " *\n" +
                         "* [8] Save game" + "\t".repeat(17) + " *\n" +
-                        "* [9] Load game" + "\t".repeat(17) + " *\n");
+                        "* [9] Load game" + "\t".repeat(17) + " *\n"+
+                        "* [10] Helpscreen" + "\t".repeat(16) + " *");
 
     }
 
@@ -112,19 +112,19 @@ public class MenuSystem implements Serializable {
             System.out.printf("* [1] %-15.15s" + "\t".repeat(5) + "%2.3s kr" + "\t".repeat(4) + "%10s st\t\t *%n",Food.FoodPrice.FLAKES, Food.FoodPrice.FLAKES.foodPrice,
                     ((int) player.getMoney()/ Food.FoodPrice.FLAKES.foodPrice));
         else
-            System.out.println("* [ ] " + Food.FoodPrice.FLAKES + ControlMethods.errorOutOfStock);
+            System.out.println("* [ ] " + Food.FoodPrice.FLAKES + GameUtils.errorOutOfStock);
 
         if (availableMoney > Food.FoodPrice.TETRABITS.foodPrice)
             System.out.printf("* [2] %-15.15s" + "\t".repeat(5) + "%2.3s kr" + "\t".repeat(4) + "%10s st\t\t *%n",Food.FoodPrice.TETRABITS, Food.FoodPrice.TETRABITS.foodPrice,
                     ((int) player.getMoney()/ Food.FoodPrice.TETRABITS.foodPrice));
         else
-            System.out.println("* [ ] " + Food.FoodPrice.TETRABITS + ControlMethods.errorOutOfStock);
+            System.out.println("* [ ] " + Food.FoodPrice.TETRABITS + GameUtils.errorOutOfStock);
 
         if (availableMoney > Food.FoodPrice.MEAT.foodPrice)
             System.out.printf("* [3] %-15.15s" + "\t".repeat(5) + "%2.3s kr" + "\t".repeat(4) + "%10s st\t\t *%n",Food.FoodPrice.MEAT, Food.FoodPrice.MEAT.foodPrice,
                     ((int) player.getMoney()/ Food.FoodPrice.MEAT.foodPrice));
         else
-            System.out.println("* [ ] " + Food.FoodPrice.MEAT + ControlMethods.errorOutOfStock);
+            System.out.println("* [ ] " + Food.FoodPrice.MEAT + GameUtils.errorOutOfStock);
 
         if (player.isPlayerRoundChoice())
             System.out.println("* [4] End turn" + "\t".repeat(17) + "*");

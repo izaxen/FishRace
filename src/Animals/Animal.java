@@ -1,5 +1,4 @@
 package Animals;
-
 import java.io.Serializable;
 
 public abstract class Animal implements Serializable {
@@ -64,6 +63,7 @@ public abstract class Animal implements Serializable {
     public int calculateValue() {
        return 0;
     }
+
     public boolean isBreeded() {return breeded;}
 
     public boolean isDoneBreeding() {return doneBreeding;}

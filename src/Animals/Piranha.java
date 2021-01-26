@@ -18,6 +18,8 @@ public class Piranha extends Animal {
         int price = this.price();
 
         if (this.getAgeFish() < 3)
+            calculatedValue = (int) (((health * price) / 100) * 0.60);
+        else if (this.getAgeFish() < 5)
             calculatedValue = (int) (((health * price) / 100) * 0.9);
         else if (this.getAgeFish() < 10)
             calculatedValue = (int) (((health * price) / 100) * 0.7);

@@ -17,7 +17,7 @@ public class Minnow extends Animal {
        int price = this.price();
 
        if (this.getAgeFish() == 1)
-           calculatedValue = (int) (((health * price) / 100) * 0.95);// Makes value on the fish depending on health and age
+           calculatedValue = (int) (((health * price) / 100) * 0.8);// Makes value on the fish depending on health and age
        else if (this.getAgeFish() == 2)
            calculatedValue = (int) (((health * price) / 100) * 0.9);
        else

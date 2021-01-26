@@ -30,8 +30,6 @@ public abstract class Food implements Serializable {
         this.price = price;
     }
 
-    public int getPrice() {
-        return price;
-    }
+
 
     }

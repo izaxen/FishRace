@@ -1,18 +1,17 @@
 package Animals;
 import Game.*;
-
 import java.io.Serializable;
 
-
 public class Breeding implements Serializable {
-    private Game myGame;
-    public Breeding(Game myGame){
+    private final Game myGame;
+
+    public Breeding(Game myGame) {
         this.myGame = myGame;
     }
 
     public void checkForPossibleBreedingCouples(Player player) {
-        System.out.println("Here comes a list of breedable fish");//TODO Fix the printout
-        System.out.printf("%-15.15s\t\t%3.3s\t%-10.10s\t\t\t%2$3.3s\t%-10.10s%n","TYPE","ID","MALENAME","FEMALENAME");
+        System.out.println("Here comes a list of breedable fish");
+        System.out.printf("%-15.15s\t\t%3.3s\t%-10.10s\t\t\t%2$3.3s\t%-10.10s%n", "TYPE", "ID", "MALENAME", "FEMALENAME");
         int checkBreedable = 0;
 
         for (int i = 0; i < player.getOwnedFishes().size(); i++) {
@@ -25,7 +24,7 @@ public class Breeding implements Serializable {
 
                     if ((checkBreedableMate.getGender().equalsIgnoreCase("female")) && (player.getOwnedFishes().get(idNumber).isDoneBreeding())) { //Checking for females that never been breeded
                         if (checkBreedableMate.getClass() == fish.getClass()) {
-                            System.out.printf("%-15.15s\t\t[%1.3s]\t%-10.10s\t\t\t[%1.3s]\t%-10.10s%n",fish.getClass().getSimpleName(),i,fish.getName(), idNumber,checkBreedableMate.getName());
+                            System.out.printf("%-15.15s\t\t[%1.3s]\t%-10.10s\t\t\t[%1.3s]\t%-10.10s%n", fish.getClass().getSimpleName(), i, fish.getName(), idNumber, checkBreedableMate.getName());
                             checkBreedable++;
                         }
                     }
@@ -37,28 +36,27 @@ public class Breeding implements Serializable {
         if (checkBreedable != 0)
             tryToBreed(player);
 
-        else
-        {System.out.println("You have no breedable couples");}
-
+        else {
+            System.out.println("You have no breedable couples");
+        }
         System.out.println("Press enter to continue");
-        ControlMethods.inputString();
-
-
-
+        GameUtils.inputString();
     }
 
     private void tryToBreed(Player player) {
         player.setPlayerRoundChoice(true);
         System.out.println("Choose which couple you want to breed from");
         System.out.println("Enter ID on first fish");
-        int maleId = ControlMethods.convertInputToInt();
+        int maleId = GameUtils.convertInputToInt(0, player.getOwnedFishes().size()-1);
         System.out.println("Enter ID on second fish");
-        int femaleId = ControlMethods.convertInputToInt();
+        int femaleId = GameUtils.convertInputToInt(0, player.getOwnedFishes().size()-1);
 
         Animal maleFish = player.getOwnedFishes().get(maleId);
         Animal femaleFish = player.getOwnedFishes().get(femaleId);
 
-        if ((maleFish.getClass().getSimpleName().equalsIgnoreCase(femaleFish.getClass().getSimpleName())) && (!maleFish.getGender().equals(femaleFish.getGender()))) { //Compare   that there is a breedable male and femlae from same class
+        if (((maleFish.getClass().getSimpleName().equalsIgnoreCase(femaleFish.getClass().getSimpleName())) &&
+                (!maleFish.getGender().equals(femaleFish.getGender()))) && maleFish.isDoneBreeding() && femaleFish.isDoneBreeding()) { //Compare that there is a breedable male and female from same class and not been breed before
+
             int breed = (int) (Math.random() * (femaleFish.getBreedChance())) + 1;
 
             if (breed > 9) {
@@ -68,23 +66,29 @@ public class Breeding implements Serializable {
 
                 for (int i = 0; i < femaleFish.getOffspring(); i++) {
                     switch (femaleFish.getClass().getSimpleName()) {
-                        case "Minnow"-> addNewFishBreeded(player, new Minnow());
-                        case "Corydoras_Sterbai"-> addNewFishBreeded(player, new Corydoras_Sterbai());
-                        case "Angelfish"-> addNewFishBreeded(player, new Angelfish());
-                        case "Piranha"-> addNewFishBreeded(player, new Piranha());
-                        case "Hyperancistrus_Zebra"-> addNewFishBreeded(player, new Hyperancistrus_Zebra());
+                        case "Minnow" -> addNewFishBreeded(player, new Minnow());
+                        case "Corydoras_Sterbai" -> addNewFishBreeded(player, new Corydoras_Sterbai());
+                        case "Angelfish" -> addNewFishBreeded(player, new Angelfish());
+                        case "Piranha" -> addNewFishBreeded(player, new Piranha());
+                        case "Hyperancistrus_Zebra" -> addNewFishBreeded(player, new Hyperancistrus_Zebra());
                     }
                 }
             } else System.out.println("Sorry the breeding didn´t work");
-        }
+        }else
+        {System.out.println("You have entered invalid ID ");
+        checkForPossibleBreedingCouples(player);}
     }
 
     private void addNewFishBreeded(Player player, Animal fishToAdd) {
-        System.out.println(ControlMethods.enterName);//TODO Add random name
-        fishToAdd.setName(ControlMethods.inputString());
+        System.out.println(GameUtils.enterName);
+        System.out.println(GameUtils.randomName);
+        fishToAdd.setName(GameUtils.inputString());
         fishToAdd.setBreeded(true);
         fishToAdd.setGender("breed");
+        if (fishToAdd.getName().equals("")) {
+            fishToAdd.setName(myGame.randomNames.genderSelectNames(fishToAdd.getGender()));
+        }
         player.getOwnedFishes().add(fishToAdd);
-        System.out.println(fishToAdd.getName() + " of the type " + fishToAdd.getClass().getSimpleName() + " with gender :"+ fishToAdd.getGender()+ " has been added to your owned fish.\n");
+        System.out.println(fishToAdd.getName() + " of the type " + fishToAdd.getClass().getSimpleName() + " with gender :" + fishToAdd.getGender() + " has been added to your owned fish.\n");
     }
 }

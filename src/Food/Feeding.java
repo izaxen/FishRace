@@ -1,8 +1,6 @@
 package Food;
-
 import Animals.*;
 import Game.*;
-
 import java.io.Serializable;
 
 public class Feeding implements Serializable {
@@ -17,7 +15,7 @@ public class Feeding implements Serializable {
         int inputChoice;
         do {
             myGame.menuSystem.feedFishMenu(player);
-            inputChoice = ControlMethods.convertInputToInt() - 1;
+            inputChoice = GameUtils.convertInputToInt() - 1;
             switch (inputChoice) {
                 case 0, 1, 2 -> feedYourFish(player, inputChoice);
 
@@ -30,7 +28,6 @@ public class Feeding implements Serializable {
 
     private void feedYourFish(Player player, int inputChoice) {
         Food food = player.getOwnedFood()[inputChoice];
-
 
         if (food.getQuantityFood() > 0) {
             for (Animal feedFish : player.getOwnedFishes()) {
@@ -56,7 +53,7 @@ public class Feeding implements Serializable {
                     feedFish.setHealth(100);
                 }
             }
-        } else System.out.println(ControlMethods.errorOutOfStock);
+        } else System.out.println(GameUtils.errorOutOfStock);
 
     }
 
@@ -69,7 +66,7 @@ public class Feeding implements Serializable {
             System.out.println("Do you want to feed " + fName + " of the type " + fClass);
             System.out.println("If you don´t want to feed the fish type NO else just press enter");
 
-            if (!ControlMethods.inputString().equalsIgnoreCase("no")){
+            if (!GameUtils.inputString().equalsIgnoreCase("no")){
                 food.setQuantityFood(food.getQuantityFood() - 1);
                 return true;}
 
