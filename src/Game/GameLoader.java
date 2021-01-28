@@ -68,12 +68,15 @@ public class GameLoader implements Serializable {
                         "[1] Try again to load game\n" +
                         "[2] Go back to start menu");
                 if (GameUtils.convertInputToInt(1, 2) == 1)
+                { System.out.println("Game loaded correctly");
+                    GameUtils.waitMilliSeconds(1200);
                     loadGame();
+                return;}
                 else
-                    myGame.setupGame();
+                {myGame.setupGame();
+                return;}
             }
-            System.out.println("Game loaded correctly");
-            GameUtils.waitMilliSeconds(1200);
+
         }
         System.out.println("No saved files available");
         GameUtils.waitMilliSeconds(1200);
